@@ -1,0 +1,38 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/detail.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="d_model_bg">
+    <div class="d_model_text">明细表</div>
+    <div class="d_model_content">
+        <div class="d_one">
+            <span style="margin-left: 150px;">运单号</span>
+            <input type="text" style="width: 100px;" id="runnum" />
+            <input type="button" style="width:100px;height:30px" value="查询" id="query" />
+            <span style="margin-left: 200px;"></span>
+            <input style="margin-left: 40px;width:100px;height:30px" type="button" value="退出" clickToClose/>
+        </div>
+        <div class="d_two">
+            <table id="moveTable" width="100%" border="1" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <td>目的店</td>
+                        <td>日期</td>
+                        <td>托运方</td>
+                        <td>接收方</td>
+                        <td>运单号</td>
+                        <td>代收款</td>
+                        <td>退货款</td>
+                        <td>手续费</td>
+                        <td>应付额</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="js/detail.js"></script>
+<script src="js/moveTable.js"></script>

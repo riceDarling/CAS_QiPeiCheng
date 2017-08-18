@@ -1,0 +1,58 @@
+.gu_model_bg {
+    background-color: #6A8F97;
+    width: 600px;
+    height: 450px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.gu_model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 7px;
+    margin-bottom: 7px;
+    width: 146px;
+    height: 12px;
+}
+
+.gu_model_content {
+    background-color: #f0f0f0;
+    width: 98%;
+    height: 90%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.gu_top_text {
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+}
+
+.gu_button_group input[type="button"] {
+    padding: 5px 10px;
+    position: relative;
+    top: 18px;
+    left: 139px;
+}
+
+.gu_button_one {
+    margin-top: 100px;
+    width: 30%;
+    float: left;
+    text-align: right;
+}
+
+.gu_button_two {
+    width: 40%;
+    margin-top: 40px;
+    float: left;
+    text-align: 408px;
+}
+
+.gu_button_three {
+    margin-top: 100px;
+    width: 30%;
+    float: left;
+}

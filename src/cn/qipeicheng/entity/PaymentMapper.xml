@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qipeicheng.dao.PaymentDao">
+
+	<!-- 添加付款信息 -->
+	<insert id="insertPayment" parameterType="cn.qipeicheng.entity.Payment">
+		insert into payment
+		values (
+		null,
+		#{waybillId},
+		#{cargovalue},
+		#{fee},
+		#{premium},
+		#{counterFee},
+		#{deliveryCharges},
+		#{serviceCharge},
+		#{freight},
+		#{receiverTotal},
+		#{paid},
+		#{receiverArrears},
+		#{collectionPayment},
+		#{modernCollection},
+		#{receiverPay},
+		#{shipperPay},
+		#{returnGoods},
+		#{returnMoney}
+		);
+	</insert>
+
+	<!-- 删除 -->
+	<delete id="deletePayment" parameterType="java.lang.Integer">
+		delete from payment
+		where waybillId = #{id}
+	</delete>
+
+	<!-- 修改代收款 -->
+	<update id="updateCollectionPayment">
+		update payment set
+		collectionPayment =
+		#{1}
+		where
+		waybillId = #{0}
+	</update>
+
+	<!-- 根据运单id查询 代收款 -->
+	<select id="selectPaymentById" parameterType="java.lang.Integer"
+		resultType="java.util.Map">
+		select SUM(collectionPayment+freight) as
+		sum,collectionPayment,freight from payment where waybillId = #{id}
+	</select>
+
+	<!-- 更新退货额 -->
+	<update id="updateReturn" parameterType="java.util.Map">
+		update payment set returnMoney =
+		#{collectionPayment} where waybillId = #{id}
+	</update>
+
+	<!-- 更新已付款金额 -->
+	<update id="updatePaid" parameterType="java.util.Map">
+		update payment 
+		<set>
+			<if test="paid != null">paid = #{paid}</if>
+		</set>
+		where waybillId = #{id}
+	</update>
+
+	<!-- 更新欠款 -->
+	<update id="updateArrears" parameterType="java.util.Map">
+		update payment 
+		<set>
+			<if test="receiverArrears != null">receiverArrears = #{receiverArrears}</if>
+		</set>
+		where waybillId =#{id}
+	</update>
+</mapper>

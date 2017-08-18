@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qipeicheng.dao.WaybillDao">
+
+	<!-- 添加运单信息 -->
+	<insert id="insertWaybill" useGeneratedKeys="true" keyProperty="id"
+		parameterType="cn.qipeicheng.entity.Waybill">
+		insert into waybill values(
+		null,
+		#{runnum},
+		#{consignment},
+		#{destination},
+		#{total},
+		#{number},
+		#{weight},
+		#{volume},
+		#{model},
+		#{payer},
+		#{remarks},
+		#{transportAtion},
+		#{deliveryMan},
+		#{status},
+		#{wayDate},
+		#{network},
+		#{adminId}
+		)
+	</insert>
+	<!-- 运单号自动生成 --> 
+	<select id="getRunnum" resultType="int">
+	SELECT runnum FROM waybill WHERE id=(SELECT MAX(id)FROM waybill)
+	</select>
+	<!-- 检查运单号是否重复 -->
+	<select id="checkRunnum" parameterType="java.lang.String"
+		resultType="int">
+		SELECT COUNT(*)FROM waybill WHERE runnum=#{runnum}
+	</select>
+	<!-- 物流查询 超级管理员 会计 -->
+	<select id="selectWaybill" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.consignment,a.destination,a.network,a.runnum,date_format(a.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,a.total,a.number,a.weight,d.shipperPay,d.receiverPay,d.freight,d.fee,d.serviceCharge,d.premium,d.collectionPayment,d.returnMoney,d.modernCollection,d.receiverTotal,d.paid,a.`status`,d.receiverArrears
+		FROM
+		waybill a,participant c,payment d
+		WHERE
+	    a.id=c.waybillId AND
+		a.id=d.waybillId
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND a.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND a.wayDate &lt;= #{endDate}</if>
+		<if test="status !=null &amp;&amp; status != 0">AND a.status = #{status}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND a.consignment = #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND a.destination = #{destination}</if>
+		<if test="network !=null &amp;&amp; network!=''">AND a.network = #{network}</if>
+		 ORDER BY a.wayDate desc
+	</select>
+	<!-- 物流查询 业务员 -->
+	<select id="selectWaybillClient" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.consignment,a.destination,a.network,a.runnum,date_format(a.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,a.total,a.number,a.weight,d.shipperPay,d.receiverPay,d.freight,d.fee,d.serviceCharge,d.premium,d.collectionPayment,d.returnMoney,d.modernCollection,d.receiverTotal,d.paid,a.`status`,d.receiverArrears
+		FROM
+		waybill a,participant c,payment d
+		WHERE
+		a.id=c.waybillId AND
+		a.id=d.waybillId AND
+		a.adminId = #{adminId}
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND a.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND a.wayDate &lt;= #{endDate}</if>
+		<if test="status !=null &amp;&amp; status != 0">AND a.status = #{status}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND a.consignment = #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND a.destination = #{destination}</if>
+		<if test="network !=null &amp;&amp; network!=''">AND a.network = #{network}</if>
+		 ORDER BY a.wayDate desc
+	</select>
+	<!-- 物流查询 - 删除 -->
+	<delete id="deleteWaybill" parameterType="java.lang.Integer">
+		delete from waybill
+		where id = #{id}
+	</delete>
+	<!-- 物流查询 - 回退上一步 -->
+	<update id="fallbackWaybill" parameterType="java.lang.Integer">
+	UPDATE waybill SET `status`= (select `status` from (SELECT b.`status`
+	FROM waybill b WHERE id=#{id}) a )-1 WHERE id=#{id}
+	</update>
+	<!-- 物流查询 - 按照接收地汇总 -->
+	<select id="selectPaymentByDestination" parameterType="java.lang.Integer"
+		resultType="java.util.Map">
+		SELECT a.destination,b.collectionPayment
+		FROM
+		`waybill` a,payment b
+		WHERE
+		a.id=b.waybillId
+		<if test="adminId != 0"> AND a.adminId = #{adminId}</if>
+		GROUP BY
+		a.destination
+	</select>
+
+	<!-- 跟踪 - 查询运单信息 超级管理员 会计 -->
+	<select id="logisticsQueryWaybill" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		a.consignment,a.destination,b.shipper,CONCAT(b.shipperPhone,'
+		',b.shipperContacts) as
+		shipperContacts,b.receiver,CONCAT(b.receiverPhone,'
+		',b.receiverContacts) as
+		receiverContacts,c.shipperPay,c.receiverPay,c.collectionPayment,d.adminName,a.remarks
+		FROM
+		waybill a ,participant b,payment c ,admin d
+		WHERE
+		a.id = b.waybillId
+		AND a.id = c.waybillId AND a.adminId=d.id AND a.runnum
+		= #{runnum}
+		GROUP BY a.runnum
+	</select>
+	<!-- 跟踪 - 查询运单信息 业务员 -->
+	<select id="logisticsQueryWaybillClient" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		a.consignment,a.destination,b.shipper,CONCAT(b.shipperPhone,'
+		',b.shipperContacts) as
+		shipperContacts,b.receiver,CONCAT(b.receiverPhone,'
+		',b.receiverContacts) as
+		receiverContacts,c.shipperPay,c.receiverPay,c.collectionPayment,d.adminName,a.remarks
+		FROM
+		waybill a ,participant b,payment c ,admin d
+		WHERE
+		a.id = b.waybillId
+		AND a.id = c.waybillId AND a.adminId=d.id AND a.runnum
+		= #{runnum} AND
+		a.adminId = #{adminId}
+		GROUP BY a.runnum
+	</select>
+	<!-- 查询所有未装车托运单 -->
+	<select id="prepareLoading" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		a.id,date_format(a.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,a.runnum,c.shipper,c.receiver,a.total,a.number,d.freight,d.premium,d.fee,d.serviceCharge,d.shipperPay,d.collectionPayment,d.modernCollection,d.counterFee,
+		d.deliveryCharges,d.receiverPay,a.destination
+		FROM
+		waybill
+		a,participant c,payment d
+		WHERE
+		a.id=c.waybillId AND a.id =
+		d.waybillId AND
+		a.`status` = '1' AND
+		a.adminId = #{adminId}
+	</select>
+	<!-- 根据运单号查询未装车托运单 -->
+	<select id="prepareLoadingByRunnum" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		a.id,date_format(a.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,a.runnum,c.shipper,c.receiver,a.total,a.number,d.freight,d.premium,d.fee,d.serviceCharge,d.shipperPay,d.collectionPayment,d.modernCollection,d.counterFee,
+		d.deliveryCharges,d.receiverPay,a.destination
+		FROM
+		waybill
+		a,participant c,payment d
+		WHERE
+	    a.id=c.waybillId AND a.id =
+		d.waybillId AND
+		a.`status` = '1' AND
+		a.adminId = #{adminId} AND a.runnum=#{runnum}
+	</select>
+	<!-- 按照接收地汇总 -->
+	<select id="selectByDestinationO" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT a.destination,b.collectionPayment
+		FROM
+		`waybill`
+		a,payment b
+		WHERE
+		a.id=b.waybillId AND a.adminId = #{adminId}
+		GROUP BY
+		a.destination
+	</select>
+
+	<!-- 按照接收地汇总明细 -->
+	<select id="selectByDestinationDetail" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		b.shipper,c.collectionPayment
+		FROM
+		waybill
+		a,participant b,payment c
+		WHERE
+		a.id=b.waybillId AND a.id=c.waybillId
+		AND a.destination =#{destination} AND a.adminId =#{adminId}
+	</select>
+
+	<!-- 修改状态 -->
+	<update id="updateStatus" parameterType="java.util.Map">
+		update waybill set
+		status = #{status} where id=#{id}
+	</update>
+
+	<!-- 根据运单号查询信息 -->
+	<select id="selectByRunnum" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.runnum,b.shipper,b.shipperAddress,b.shipperPhone,b.shipperContacts,b.receiver,b.receiverAddress,b.receiverPhone,b.receiverContacts,a.remarks,a.consignment,date_format(d.date,'%Y-%m-%d
+		%H:%i:%s') as
+		date,a.total,a.number,c.shipperPay,c.freight,c.premium,c.fee,c.serviceCharge,c.collectionPayment,c.receiverTotal,c.deliveryCharges,c.counterFee,c.receiverPay
+		FROM
+		waybill a,participant b,payment c,logisticstracking d
+		WHERE
+		a.id =
+		b.waybillId AND a.id = c.waybillId AND a.id = d.waybillId AND a.runnum
+		= #{runnum} AND
+		a.`status`='2'
+		GROUP BY a.runnum
+	</select>
+	<!-- 根据运单号查询信息 -->
+	<select id="selectByRunnumStatus" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.runnum,b.shipper,b.shipperAddress,b.shipperPhone,b.shipperContacts,b.receiver,b.receiverAddress,b.receiverPhone,b.receiverContacts,a.remarks,a.consignment,date_format(d.date,'%Y-%m-%d
+		%H:%i:%s') as
+		date,a.total,a.number,c.shipperPay,c.freight,c.premium,c.fee,c.serviceCharge,c.collectionPayment,c.receiverTotal,c.deliveryCharges,c.counterFee,c.receiverPay,c.receiverArrears
+		FROM
+		waybill a,participant b,payment c,logisticstracking d
+		WHERE (a.`status`='2' or a.`status`='3') AND
+		a.id =
+		b.waybillId AND a.id = c.waybillId AND a.id = d.waybillId AND a.runnum
+		= #{runnum} 
+		GROUP BY
+		a.runnum
+	</select>
+	<!-- 得到运单信息根据运单号 -->
+	<select id="getWayInfoByRunnum" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		a.id,date_format(d.date,'%Y-%m-%d %H:%i:%s') as
+		date,a.runnum,b.shipper,b.receiver,a.total,a.number,c.freight,c.premium,c.fee,c.serviceCharge,c.shipperPay,c.receiverPay,c.counterFee,a.destination
+		FROM
+		waybill a,participant b,payment c,logisticstracking d
+		WHERE
+		a.id=b.waybillId AND a.id = c.waybillId AND a.id = d.waybillId AND
+		a.`status`='1' AND
+		a.runnum = #{runnum}
+		GROUP BY a.runnum
+	</select>
+	<!-- 根据id查询托运方信息 -->
+	<select id="selectShipperById" parameterType="java.lang.Integer"
+		resultType="java.util.Map">
+		select
+		a.runnum,b.shipper,b.shipperAddress,b.shipperPhone,b.shipperContacts
+		from waybill a,participant b where a.id = b.waybillId and a.id = #{id}
+		GROUP BY a.runnum
+	</select>
+
+	<!-- 根据id查询收件方信息 -->
+	<select id="selectReceiverById" parameterType="java.lang.Integer"
+		resultType="java.util.Map">
+		select
+		a.runnum,b.receiver,b.receiverAddress,b.receiverPhone,b.receiverContacts
+		from waybill a,participant b where a.id = b.waybillId and a.id = #{id}
+		GROUP BY a.runnum
+	</select>
+
+	<!-- 装车前核对 -->
+	<select id="uploadCheck" parameterType="java.lang.Integer"
+		resultType="java.util.Map">
+		SELECT
+		a.id,date_format(a.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,a.runnum,b.shipper,b.receiver,a.total,a.number,c.freight,c.premium,c.fee,c.serviceCharge,c.shipperPay,c.receiverPay,c.counterFee,c.collectionPayment,a.destination
+		FROM
+		waybill a,participant b,payment c
+		WHERE
+		a.id=b.waybillId AND a.id = c.waybillId  AND
+		a.`status`='1' AND
+		a.id=#{id}
+	</select>
+	<!-- 获取运单状态 -->
+	<select id="getStatus" parameterType="java.lang.Integer"
+		resultType="java.lang.String">
+		select status from waybill where id= #{id}
+	</select>
+	<!-- 更新备注 -->
+	<update id="updateRemarks" parameterType="java.lang.String">
+		update waybill set
+		remarks = #{remarks}
+	</update>
+	<!-- 获取运单操作员id -->
+	<select id="getAdminId" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select adminId from waybill where runnum = #{runnum}
+	</select>
+
+	<!-- 获取 收件方和应收款 -->
+	<select id="selectMoney" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT a.receiver,SUM(b.collectionPayment+b.freight) AS sum
+		FROM participant a,payment b WHERE a.waybillId = b.waybillId AND
+		a.waybillId=#{id}
+	</select>
+</mapper>

@@ -1,0 +1,52 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/Pickup_Money.css">
+</head>
+
+<body>
+    <div class="tg_model_bg">
+        <div class="tg_model_text">取货</div>
+        <div class="tg_model_content">
+
+            <div class="tg_two">
+                收件方:
+                <input type="text" id="receivera" disabled></br> 
+                应收款:
+                <input type="text" id="receiverTotal" disabled></br> ---------------------------------------------------------------------------------------
+            </div>
+            <h2 style=" margin-left:-400px;
+    margin-top: 100px;"> 开始取货</h2>
+            <div id="detail_info">
+
+                <div id="delivery_man">
+                    送货员
+                    <select id="deliver">
+                        <option></option>
+
+                    </select>
+                </div>
+                <div id="Money">
+                    现金
+                    <input type="number" id="mon">
+                </div>
+                <div id="Other">
+                    其他
+                    <input type="number" value="0" disabled>
+                </div>
+                <div id="Arrears">
+                    欠款
+                    <input type="number" id="receiverArrears">
+                </div>
+                <div id="pay">
+                    <button style="height:40px; width:100px;" id="pay_btn" clickToClose>付款
+                       
+                    </button>
+                </div>
+                <div id="quit">
+                    <button style="height:40px; width:100px" id="p_close" clickToClose>退出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./js/pickup_money.js"></script>

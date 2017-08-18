@@ -1,0 +1,65 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/take_goods.css" />
+
+
+<div class="tg_model_bg">
+    <div class="tg_model_text">收款报表</div>
+    <div class="tg_model_content">
+        <div class="tg_one">
+            <div class="tg_one_two">
+                <span>物流托运收款报表</span>
+            </div>
+        </div>
+        <div class="tg_two">
+            <div class="tg_two_one"></div>
+            <div class="tg_two_two">
+                <span>日&nbsp;&nbsp;期</span>
+                <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" placeholder="点击输入日期" id="startDate" /> ->
+                <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" placeholder="点击输入日期" id="endDate" />
+            </div>
+            <div class="tg_two_three">
+                <span>托运地</span>
+                <select name="" style="width: 100px;" id="consignment">
+					<option value=""></option>
+				</select>————>
+                <span>接收地</span>
+                <select name="" style="width: 100px;" id="destination">
+						<option value=""></option>
+					</select>
+
+            </div>
+            <div class="tg_two_four">
+                <!--<div class="tg_two_four_one">
+                    <div class="tg_two_four_one_two">
+                        <input type="button" value="查询" />
+                    </div>
+                </div>-->
+                <div class="tg_two_four_two">
+
+                </div>
+
+                <div class="clear"></div>
+            </div>
+            <div class="tg_two_five">
+                <div class="tg_two_five_one">
+                    <input type="button" value="按托运方汇总" class="button_five" clickToPopup="momey_byconsign" />
+                    <input type="button" value="按日期汇总" class="button_five" clickToPopup="money_bydate2" />
+                    <input type="button" value="全部运单列表" class="button_five" clickToPopup="money_all_waybill" />
+                </div>
+                <div class="tg_two_five_one">
+                    <input type="button" value="托运方付运费列表" class="button_five" clickToPopup="query_money_byconsign" />
+                    <input type="button" value="按接收方汇总" class="button_five" clickToPopup="money_byreceive" />
+                    <input type="button" value="按日期-方向汇总" class="button_five" clickToPopup="money_bydate" />
+                </div>
+                <div class="tg_two_five_one">
+                    <input type="button" value="退货列表" class="button_five" clickToPopup="ReturnGood_List" />
+                    <input type="button" value="退出" class="button_five" clickToClose/>
+                    <input type="button" value="接收方付运费列表" class="button_six" clickToPopup="receivePayList_money_all_waybill" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/payment.js"></script>
+

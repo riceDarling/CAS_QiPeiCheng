@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qipeicheng.dao.RegionDao">
+	<!-- 根据登录的用户查询所属目的地 -->
+	<select id="getRegionByadminId" parameterType="int"
+		resultType="cn.qipeicheng.entity.Region">
+		SELECT a.id,a.regionName,a.adminId,b.adminName FROM region a 
+		LEFT JOIN admin b ON a.adminId=b.id
+		WHERE
+		a.adminId=#{adminId}
+	</select>
+	<!-- 查询所有目的地 -->
+	<select id="getAllRegion" resultType="cn.qipeicheng.entity.Region">
+		SELECT a.id, a.regionName as regionName,b.adminName as adminName  from
+		region a LEFT JOIN admin b 
+        ON a.adminId=b.id
+		WHERE 1=1 GROUP BY regionName ORDER BY id
+	</select>
+	<!-- 根据id查询线路 -->
+	<select id="getRegionById" parameterType="int"
+		resultType="cn.qipeicheng.entity.Region">
+		SELECT a.id, a.regionName as regionName,a.adminId,b.adminName as adminName  from
+		region a LEFT JOIN admin b 
+        ON a.adminId=b.id
+		WHERE 1=1 and a.id=#{id}
+	</select>
+	<!-- 修改线路 -->
+	<update id="upRegionInfo" parameterType="cn.qipeicheng.entity.Region">
+		UPDATE region
+		<set>
+			<if test="regionName != null">regionName = #{regionName},</if>
+			<if test="regionName != null">adminId = #{adminId}</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	<!-- 增加一条线路 -->
+	<insert id="addRegion" parameterType="cn.qipeicheng.entity.Region"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO region
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="regionName != null">regionName,</if>
+			<if test="regionName != null">adminId</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
+			<if test="regionName != null">#{regionName},</if>
+			<if test="regionName != null">#{adminId}</if>
+		</trim>
+	</insert>
+	<!-- 删除一条线路 -->
+	<delete id="delRegionById" parameterType="int">
+		delete from
+		region
+		where
+		id=#{id}
+	</delete>
+</mapper>

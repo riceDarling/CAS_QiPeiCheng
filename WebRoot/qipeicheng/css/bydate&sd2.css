@@ -1,0 +1,73 @@
+.model_bg {
+    background-color: #6A8F97;
+    width: 1000px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: -21px;
+    margin-bottom: 7px;
+    width: 100px;
+    height: 12px;
+}
+
+.model_content {
+    background-color: white;
+    width: 98%;
+    height: 95%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.bds2_one {
+    font-size: 12px;
+    width: 100%;
+    height: 7%;
+}
+
+.bds2_two {
+    font-size: 12px;
+    overflow: auto;
+    text-align: center;
+    width: 100%;
+    height: 83%;
+}
+
+.bds2_two > table {
+    border-collapse: collapse;
+    white-space: nowrap;
+    width: 100%;
+    table-layout: fixed;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.bds2_two > table > thead td {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 3px 5px;
+}
+
+.bds2_two > table td {
+    border: 1px solid #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bds2_three {
+	margin-top:5px;
+    width: 100%;
+    height: 5%;
+}

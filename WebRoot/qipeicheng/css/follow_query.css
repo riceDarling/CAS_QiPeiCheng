@@ -1,0 +1,127 @@
+.fq_model_bg {
+    background-color: #6A8F97;
+    width: 950px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.fq_model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 7px;
+    margin-bottom: 7px;
+    width: 150px;
+    height: 12px;
+}
+
+.fq_model_content {
+    background-color: white;
+    width: 99%;
+    height: 95%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.fq_one {
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+}
+
+.fq_two_one {
+    line-height: 28px;
+    height: 28px;
+    font-size: 0;
+    -webkit-text-size-adjust: none;
+}
+
+.fq_two_one span {
+    font-size: 14px;
+    width: 227px;
+    display: inline-block;
+    text-align: center;
+}
+
+.fq_two {
+    width: 100%;
+    height: 50%;
+}
+
+.fq_two_one {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.fq_two_two {
+    box-sizing: border-box;
+    width: 100%;
+    height: 86%;
+    overflow-y: scroll;
+}
+
+.fq_two_two > table {
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    border: none;
+}
+
+.fq_two_two > table td {
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 1px solid #666;
+    border-top: none;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.fq_three {
+    width: 100%;
+    height: 40%;
+    text-align: left;
+}
+
+.fq_three_one {
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+
+.fq_three span {
+    display: inline-block;
+    width: 70px;
+    text-align: right;
+}
+
+.fq_three_two {
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+
+.fq_three_three {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.fq_three_model {
+    margin-top: 10px;
+    width: 100%;
+    height: 12%;
+}
+
+.fq_three_model1 {
+    margin-top: 5px;
+    width: 100%;
+    height: 12%;
+}
+}

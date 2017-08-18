@@ -1,0 +1,59 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/unpaid.css" />
+<div class="up_model_bg">
+    <div class="up_model_text">欠代收款报表</div>
+    <div class="up_model_content">
+        <div class="up_one">
+            <div class="up_one_one"></div>
+            <!--<div class="up_one_two">
+				<span>按照取货日期、原发地查询</span>
+			</div>-->
+            <div class="up_one_two">
+                <span style="font-size:xx-large;">物流托运欠代收款汇总</span>
+            </div>
+            <!--<div class="up_one_three">
+				<span style="color: red; font-size:xx-large;">分店</span>
+			</div>-->
+        </div>
+        <div class="up_two">
+            <div class="up_two_one"></div>
+            <div class="up_two_two">
+                <span>日&nbsp;期</span>
+                <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" placeholder="点击输入日期" id="startDate" /> ->
+                <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" placeholder="点击输入日期" id="endDate" />
+            </div>
+            <div class="up_two_three">
+                <span>托运地</span>
+                <select name="" style="width: 100px;" id="consignment">
+					<option value=""></option>
+					
+				</select>
+                <span>-></span>
+                <span>目的地</span>
+                <select name="" style="width: 100px;" id="destination">
+					<option value=""></option>
+					
+				</select>
+            </div>
+            <div class="up_two_four">
+
+                <div class="up_two_four_two">
+                    <div class="up_two_four_two_one">
+                        <input type="button" name="" id="" value="按取货时间汇总" clickToPopup="time" />
+                    </div>
+                    <div class="up_two_four_two_two">
+                        <!--<input type="button" value="查询" style="margin-right:30px;" />-->
+                        <input type="button" name="" id="" style="margin-right:30px;" value="按托运方汇总" clickToPopup="pool" />
+
+                        <input type="button" value="明细表" clickToPopup="detail" />
+                    </div>
+                    <div class="up_two_four_two_three">
+                        <input type="button" value="退出" clickToClose/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./js/payment.js"></script>

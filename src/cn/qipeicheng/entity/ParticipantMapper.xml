@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qipeicheng.dao.ParticipantDao" >
+
+	<!-- 添加参与方态信息 -->
+	<insert id="insertParticipant" parameterType="cn.qipeicheng.entity.Participant">
+		insert into participant values (
+			null,
+			#{waybillId},
+			#{shipper},
+			#{shipperAddress},
+			#{shipperPhone},
+			#{shipperContacts},
+			#{receiver},
+			#{receiverAddress},
+			#{receiverPhone},
+			#{receiverContacts}
+		)
+	</insert>
+	
+	<!-- 删除双方信息 -->
+	<delete id="deleteParticipant" parameterType="java.lang.Integer">
+		delete from participant where waybillId = #{id}
+	</delete>
+	
+	<!-- 修改托运方信息 -->
+	<update id="updateShipper" parameterType="java.util.Map">
+		update participant set shipper = #{shipper},shipperAddress = #{address},shipperPhone=#{phone},shipperContacts = #{contacts} where waybillId=#{id}
+	</update>
+	
+	<!-- 修改收件方信息 -->
+	<update id="updateReceiver" parameterType="java.util.Map">
+		update participant set receiver = #{receiver},receiverAddress = #{address},receiverPhone=#{phone},receiverContacts = #{contacts} where waybillId=#{id}
+	</update>
+	
+</mapper>

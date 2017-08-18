@@ -1,0 +1,59 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/loading_verification.css" />
+<div class="lv_model_bg">
+    <div class="lv_model_text">物流运输---装车核查(逐笔扫描托运单的单号条形码)</div>
+    <div class="lv_model_content">
+        <div class="lv_one">
+            <span style="margin-left: 50px;">装车日</span>
+            <input type="text" class="date_plugin_xk" id="time" readonly="ture" />
+            <span style="margin-left: 100px;"> 物流托运装车核对单 汽配城</span>
+            <span style="margin-left: 200px;"> <input type="button" style="width:100px;height:30px" value="退出" clickToClose/></span>
+        </div>
+        <div class="lv_two">
+            <div class="lv_two_one cursor" clickToPopup="loading_verification" clickToClose>
+                第一步：装车检查，扫描托运单号条码
+            </div>
+            <div class="lv_two_two cursor" clickToPopup="Loading_Verification02" clickToClose>第二步：上传已装车托运单</div>
+            <div class="lv_two_two">第三步：检查未装车托运单</div>
+            <div class="lv_two_two">第四步：打印装车报表</div>
+        </div>
+        <div class="lv_three">
+            <div class="lv_three_one">
+
+            </div>
+            <div class="lv_three_two" style="text-align: center;">
+                先选择装车的目的地，在扫描运单号码
+            </div>
+        <div class="lv_three_two" >
+                <span style="margin-left:380px;">目的地</span>
+                <select id="destination" style="width: 100px;" disabled>
+                    <option value=""></option>
+					<option value="市内南开">市内南开</option>
+					<option value="中北镇专线">中北镇专线</option>
+				</select>
+            </div>
+            <div class="lv_three_three">
+
+                <span style="margin-left:380px;"></span> 运单号
+                <input type="text" style="width:96px;" id="runnum"/>
+                <input type="button" style="width:100px;height:30px"  name="" id="toTwo" value="下一步" clickToPopup="next" clickToClose/>
+                <input type="button" style="width:100px;height:30px" value="未装车查询 A" clickToPopup="unload_query" />
+            </div>
+             <div class="lv_three_two" style="text-align: center;margin-top:20px;">
+                逐笔扫描需要装车的托运单号条码，一边核对上车的件数
+            </div> 
+        </div>
+    </div>
+</div>
+
+<script src="js/loading_verification.js"></script>
+<script>
+$(document).keyup(function(e){
+	var currKey=0,e=e||event;   
+    currKey=e.keyCode||e.which||e.charCode;   
+    var keyName = String.fromCharCode(currKey); 
+	if (currKey==65){ 
+        $("[clickToPopup='unload_query']").click();
+      } 
+});
+</script>

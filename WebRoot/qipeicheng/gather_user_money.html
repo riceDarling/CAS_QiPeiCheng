@@ -1,0 +1,43 @@
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/gather_user_money.css" />
+<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+<div class="gu_model_bg">
+    <div class="gu_model_text">代收款账户——代收款汇总</div>
+    <div class="gu_model_content">
+        <div class="gu_top_text">
+            <span style="font-size: 40px;">代&nbsp;收&nbsp;款&nbsp;汇&nbsp;总</span>
+        </div>
+        <span style="margin-left: 50px;">日&nbsp;&nbsp;期</span>
+
+        <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" placeholder="点击输入日期" subID="startDate" id="startDate"/> ->
+        <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" placeholder="点击输入日期" subID="endDate" id="endDate"/>
+
+        <div class="gu_button_group">
+
+            <div class="gu_button_two">
+                <input type="button" value="按托运地汇总《A》" clickToPopup="gather_consignpeople_money" /><br />
+                <input style="margin-top: 20px;" type="button" value="按接收地汇总《S》" clickToPopup="gather_receive_detail_button" /><br />
+                <input style="margin-top: 20px;" type="button" value="按托运方汇总《D》" clickToPopup="gather_consign_detail_button" />
+            </div>
+            <div class="gu_button_three">
+                <input type="button" value="退出" clickToClose/>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).keyup(function(e){
+	var currKey=0,e=e||event;   
+    currKey=e.keyCode||e.which||e.charCode;   
+    var keyName = String.fromCharCode(currKey); 
+	if (currKey==65){ 
+        $("[clickToPopup='gather_consignpeople_money']").click();
+      } 
+	else if(currKey==83){ 
+        $("[clickToPopup='gather_receive_detail_button']").click();
+    } 
+	else if(currKey==68){ 
+        $("[clickToPopup='gather_consign_detail_button']").click();
+    } 
+});
+</script>

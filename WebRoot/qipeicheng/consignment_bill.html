@@ -1,0 +1,295 @@
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache"  />
+<meta http-equiv="content-type" content="no-cache, must-revalidate" />
+<META HTTP-EQUIV="expires" CONTENT="0">
+<link rel="stylesheet" href="css/consignment_bill.css" />
+<style>
+#print {
+	display: none;
+}
+</style>
+<style media="print">
+#print {
+	display: block
+}
+</style>
+<script src="js/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="js/jquery-barcode.js"></script>
+<script type="text/javascript" src="js/jquery.jqprint-0.3.js"></script>
+<script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+<div class="cb_model_bg" id="bg">
+	<div class="cb_model_text">物流运输---输入托运单</div>
+	<div class="cb_model_content">
+		<div class="cb_content_title">
+			<!-- <a>物&nbsp;流&nbsp;托&nbsp;运&nbsp;单&nbsp;</a> -->
+		</div>
+		<div class="cb_content_middle">
+			<div class="cb_content_middle_bg">
+				<div class="cb_centent_middle_model">
+					<div class="cb_package" style="width:100% !important";>
+						<div class="cb_content_middle_name">运单号</div>
+						<div class="cb_centent_middle_fill3">
+							<input type="text" style="width:100px;height:12px;" id="runnum" subID="runnum" nes="运单号" />
+							<div class="redalert" style="display:none;" >运单号重复！</div>
+							<div class="bluealert" style="display:none;" >运单号可用！</div>
+						</div>
+						<div class="cb_content_middle_name2">托运地</div>
+						<div class="cb_centent_middle_fill1">
+							<select id="getRegion" style="width:90px;" subID="consignment" subtype="changeText">
+							</select>
+						</div>
+						<div class="cb_content_middle_name2">目的地</div>
+						<div class="cb_centent_middle_fill1">
+							<select id="getRegion2" style="width:90px;" subID="destination" subtype="changeText">
+							</select>
+						</div>
+						<div class="cb_content_middle_name2">网络协作</div>
+						<div class="cb_centent_middle_fill2">
+							<select  style="width:80px;" subID="network">
+								<option value="网络协作">网络协作</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="cb_centent_middle_model">
+					<div class="cb_package">
+						<div class="cb_content_middle_name">托运方</div>
+						<input type="text" class="cb_model_text1" subID="shipper" id="shipper" />
+					</div>
+					<div class="cb_name2">收件方</div>
+					<input type="text" class="cb_model_text1" subID="receiver" id="receiver" />
+				</div>
+				<div class="cb_centent_middle_model">
+					<div class="cb_package">
+						<div class="cb_content_middle_name">地&emsp;址</div>
+						<input type="text" class="cb_model_text1" subID="shipperAddress" />
+					</div>
+					<div class="cb_name2">地&emsp;址</div>
+					<input type="text" class="cb_model_text1" subID="receiverAddress" />
+				</div>
+				<div class="cb_centent_middle_model">
+					<div class="cb_package">
+						<div class="cb_content_middle_name">电&emsp;话</div>
+						<input type="text" class="cb_model_text1" id="phoneOne" subID="shipperPhone" />
+					</div>
+					<div class="cb_name2">电&emsp;话</div>
+					<input type="text" class="cb_model_text1" id="phoneTwo" subID="receiverPhone" />
+				</div>
+				<div class="cb_centent_middle_model">
+					<div class="cb_package">
+						<div class="cb_content_middle_name">联系人</div>
+						<input type="text" class="cb_model_text1" subID="shipperContacts" /> 
+					</div>
+					<div class="cb_name2">联系人</div>
+					<input type="text" class="cb_model_text1" subID="receiverContacts" />
+				</div>
+				<div class="cb_centent_middle_model">
+					<div class="cb_package">
+						<div class="cb_content_middle_name">总件数</div>
+						<div class="cb_demo">
+							<input type="text" style="width: 50px;" subID="total"  value="1" id="all_number" onchange="Freight()" onBlur="total()" />
+						</div>
+						<div class="cb_content_middle_name1">重量</div>
+						<div class="cb_demo">
+							<input type="text" style="width: 50px;" subID="weight" id="weight" value="0" />Kg
+						</div>
+						<div class="cb_content_middle_name1">体积</div>
+						<div class="cb_demo">
+							<input type="text" style="width: 40px;" subID="volume" value="0" id="volume" />立厘
+						</div>
+						<span>货物值</span>
+					</div>
+					<div class="cb_demo1">
+						<input id="goods_cost" type="text" style="width: 50px;" subID="cargovalue" value="0" onBlur="total()" />元
+					</div>
+					<div class="cb_content_middle_name2">代收款</div>
+					<div class="cb_demo1">
+						<input id="replace_cost" type="text" style="width: 40px;" subID="collectionPayment" value="0" onBlur="total()" />元
+					</div>
+					<div class="cb_content_middle_name2">方式</div>
+					<div class="cb_demo1" style="border-right:none;">
+						<select subID="model">
+							<option value="自提">1:自提</option>
+							<option value="送货">2:送货</option>
+						</select>
+					</div>
+				</div>
+				<div class="cb_centent_middle_model">
+					<div class="cb_package">
+						<div class="cb_content_middle_name">运费</div>
+						<div class="cb_demo">
+							<input type="number" style="width: 50px;" subID="freight" value="6" id="freight" onBlur="total()" />元
+						</div>
+						<div class="cb_content_middle_name1">工本费</div>
+						<div class="cb_demo2">
+							<input type="text" style="width: 40px;" subID="fee" value="0" id="flat_cost" onBlur="total()" />元
+						</div>
+						<span>保险费</span>
+					</div>
+					<div class="cb_demo1">
+						<input id="safe_cost" type="text" style="width: 50px;" subID="premium" value="0" onBlur="total()" />元
+					</div>
+					<div class="cb_content_middle_name2">手续费</div>
+					<div class="cb_demo1">
+						<input id="procedures_cost" type="text" style="width: 40px;" subID="counterFee" value="0" onBlur="total()" />元
+					</div>
+					<div class="cb_content_middle_name2">送货费</div>
+					<div class="cb_demo1" style="border-right:none;">
+						<input id="deliver_cost" type="text" style="width: 50px;" subID="deliveryCharges" value="0" onBlur="total()" />元
+					</div>
+				</div>
+				<div class="cb_centent_middle_model">
+					<div class="cb_package">
+						<div class="cb_content_middle_name">付费方</div>
+						<div class="cb_demo">
+							<select name="" id="pay_client" subID="payer" style="width:60px">
+								<option value="1">收件方付费</option>
+								<option value="2">托运方付费</option>
+								<option value="2">托运方月结</option>
+							</select>
+						</div>
+						<div class="cb_content_middle_name1">服务费</div>
+						<div class="cb_demo2">
+							<input type="text" style="width: 40px;" subID="serviceCharge" value="0" id="service_cost" onBlur="total()" />元
+						</div>
+						<span>合计</span>
+					</div>
+					<div class="cb_demo1">
+						<input type="text" style="width: 50px;" value="0" readonly="ture" onBlur="total()" />元
+					</div>
+					<div class="cb_content_middle_name2">合计</div>
+					<div class="cb_demo1">
+						<input type="text" style="width: 40px;" value="0" readonly="ture" onBlur="total()" />元
+					</div>
+					<div class="cb_content_middle_name2">总计</div>
+					<div class="cb_demo1" style="border-right:none;">
+						<input id="total" type="text" style="width: 50px;" value="0" subID="receiverTotal" readonly="ture" onBlur="total()" />元
+					</div>
+				</div>
+				<div class="cb_centent_middle_model1">
+					<div class="cb_content_middle_name3">备注内容</div>
+					<!--   <span style="vertical-align: top;margin-top:4px;display:inline-block;">
+					  		<select>
+					  			<option value="汽车配件">汽车配件</option>
+					  		</select>
+					  	</span>-->
+					<span style="vertical-align: top;margin-top:2px;display:inline-block;"> <textarea style="width:620px;height:40px;resize: none;margin-top:2px;" subID="remarks"></textarea>
+					</span>
+				</div>
+				<div class="cb_centent_middle_model" style="border-bottom:1px solid #666">
+					<div class="cb_content_middle_name4">收货员</div>
+					<div class="cb_demo3">
+						<select subID="salesperson">
+						</select>
+					</div>
+					<div class="cb_content_middle_name4">运输</div>
+					<span> <label><input name="Fruit" type="radio" value="汽运" subID="transportAtion" subtype="check" checked />汽运 </label> <label><input name="Fruit" type="radio" value="铁路" subID="transportAtion" subtype="check" />铁路</label> <label><input name="Fruit" type="radio" value="空运" subID="transportAtion" subtype="check" />空运 </label>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="cb_content_bottom">
+			<span style="margin-left: 250px;"> 
+			<!-- <button onclick="printbill()">打印物流托运单《O》</button> -->
+				<!-- <button clickToSubmit="waybill/insertWaybill" onclick="printbill()">打印物流托运单《O》</button>   -->
+				 <button style=" height:40px" clickToSubmit="waybill/insertWaybill">打印物流托运单<span style="color:red;font-size:25px">&nbsp;[</span></button>  
+				<button style=" height:40px">打印物流标签<span style="color:red;font-size:25px">&nbsp;]</span></button>
+				<!-- <button onclick="printArea()">打印物流标签《P》</button> -->
+			</span> <span style="margin-left: 50px;">
+				<button style="width:100px; height:40px" class="cb_button" clickToClose>退出</button>
+			</span>
+		</div>
+	</div>
+	<div id="PFP">
+		<!--startprint-->
+		<div id="print" style="margin:0;padding:0px;margin-top:130px;font-size:15px;">
+			<span id="time"></span><span id="firstone" style="margin-left:120px;"></span><span id="firsttwo" style="margin-left:150px;"></span><br /> <br /> 
+			<span id="secondone" style="margin-left:100px;"></span><span id="secondtwo" style="margin-left:280px;"></span><span id="secondthree" style="margin-left:50px;"></span><br />
+			<div style="height:10px;width:100%"></div>
+			<span id="thirdone" style="margin-left:100px;margin-top:20px;"></span><span id="thirdtwo" style="margin-left:280px;margin-top:20px;"></span><br />
+			<br />
+			<br />
+			<br />
+			<br /> 
+			<br /> 
+			<span id="fourthone" style="margin-left:120px;margin-top:10px;"></span><span id="fourthtwo" style="margin-left:150px;margin-top:10px;"></span><span id="fourththree" style="margin-left:100px;margin-top:10px;"></span><span id="fourthfour" style="margin-left:210px;margin-top:10px;"></span><br />
+		</div>
+	</div>
+	<!--endprint-->
+	<div id="PF">
+		<!--startprint-->
+		<div id="print" style="border:1px solid #000;width:265px;height:170px;text-align:center;font-weight:bold;">
+			<span id="start"></span><br /> <span id="receive" style="font-size:30px"></span><br />
+			<div id="bcTarget" style="margin-left:46px;"></div>
+			<span id="run"></span><br /> <span>件数</span>&nbsp;<span id="js"></span>&nbsp;&nbsp;重量&nbsp;<span id="jsweight"></span>&nbsp;kg</span>&nbsp;&nbsp;体积&nbsp;<span id="jsvolume"></span>&nbsp;立厘</span><br /> <span>天津正通物流有限公司<br />
+		</div>
+	</div>
+	<!--endprint-->
+</div>
+<!-- <script  src='http://127.0.0.1:8000/CLodopfuncs.js'></script> 
+<script type="text/javascript" src="js/CLodopfuncs.js"></script>-->
+<script type="text/javascript" src="js/consignment_bill.js"></script>
+<script>
+ $(document).keyup(function(e){
+	var currKey=0,e=e||event;   
+    currKey=e.keyCode||e.which||e.charCode;   
+    var keyName = String.fromCharCode(currKey); 
+	   if (currKey==219){ 
+       $("[clickToSubmit='waybill/insertWaybill']").click();
+       getRunnum();
+       //printbill();
+      } 
+	else if(currKey==221){ 
+		//printArea();
+    }   
+}); 
+    function Freight() {
+        var a = 0;
+        a = $("#all_number").val();
+        b= $("#freight").val();
+       $("#freight").val(a*b);
+    }
+
+    function total() {
+        var fr = 0; /*freight*/
+        var fl = 0; /*flat_cost*/
+        var se = 0; /*service_cost*/
+        var g = 0; /*goods_cost*/
+        var sa = 0; /*safe_cost*/
+        var r = 0; /*replace_cost代收款*/
+        var pr = 0; /*procedures_cost手续费*/
+        var de = 0; /*deliver_cost送货费*/
+        var t = 0; /*total*/
+        fr = $("#freight").val() * 1;
+        fl = $("#flat_cost").val() * 1;
+        sa = $("#service_cost").val() * 1;
+        g = $("#goods_cost").val() * 1;
+        se = $("#safe_cost").val() * 1;
+        r = $("#replace_cost").val() * 1;
+        pr = $("#procedures_cost").val() * 1;
+        de = $("#deliver_cost").val() * 1;
+        $("#total").val(fr + fl + sa + g + se + r + pr + de);
+
+    }
+    function time() {
+        var time = new Date();
+        var y = time.getFullYear();
+        var m = time.getMonth() + 1;
+        if (m < 10)
+            m = '0' + m
+        var d = time.getDate();
+        if (d < 10)
+            d = '0' + d
+        var h = time.getHours();
+        if (h < 10)
+            h = '0' + h
+        var mi = time.getMinutes();
+        if (mi < 10)
+            mi = '0' + mi
+        var s = time.getSeconds();
+        if (s < 10)
+            s = '0' + s
+        return y + "-" + m + "-" + d + " " + h + ":" + mi + ":" + s;
+    }
+
+</script>

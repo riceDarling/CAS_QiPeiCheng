@@ -1,0 +1,153 @@
+.uq_model_bg{
+	background-color: #6A8F97;
+	width: 1350px;
+	height: 600px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.uq_model_text{
+	font-family: "微软雅黑";
+	font-size: 12px;
+	margin-top: 5px;
+	margin-left: 7px;
+	margin-bottom: 7px;
+	width: 120px;
+	height: 12px;
+}
+.uq_model_content{
+	background-color: white;
+	width: 98%;
+	height: 94%;
+	border: 1px solid black;
+	margin: 0 auto;
+}
+.uq_button{
+	height: 10%;
+	margin-left: 800px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.uq_button_exit{
+	height: 100%;
+}
+.uq_model_table{
+	overflow: auto;
+	width: 100%;
+	height: 80%;
+	text-align: center;
+}
+.uq_model_table>table{
+	border-collapse: collapse;
+}
+.uq_table_number{
+	font-size: 14px
+	width:50px;
+	text-align: center;
+}
+.uq_table_date{
+	font-size: 14px
+	width:120px;
+	text-align: center;
+}
+.uq_table_enumber{
+	font-size: 14px
+	width:80px;
+	text-align: center;
+}.uq_table_transport{
+	font-size: 14px
+	width:240px;
+	text-align: center;
+}
+.uq_table_fare{
+	font-size: 14px
+	width:100px;
+	text-align: center;
+}
+.uq_model_sum{
+	box-sizing: border-box;
+	line-height: 23px;
+	font-size: 12px;
+	text-align: center;
+	float: left;
+	width: 55px;
+	height: 100%;
+	border: 1px solid #666;
+	border-right: none;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.uq_model_bottom{
+	height: 10%;
+}
+.uq_table_sum_text{
+	width:34px;
+	text-align: center;
+	margin: 5px;
+	margin-right: 4px;
+	font-size:17px;
+	float: left;
+	height: 10%;
+}
+.uq_table_blank{
+	margin: 5px;
+	width: 461px;
+	height: 10%;
+	float: left;
+}
+.uq_table_number_border{
+	width:50px;
+	text-align: center;
+	border: 1px solid black;
+	float: left;
+}
+.uq_table_number_blank{
+	box-sizing: border-box;
+	line-height: 23px;
+	font-size: 12px;
+	text-align: center;
+	float: left;
+	width: 45px;
+	height: 5%;
+	border: 1px solid #666;
+	margin-top: 1px;
+
+}
+.uq_table_fare_blank
+{
+	box-sizing: border-box;
+	line-height: 23px;
+	font-size: 12px;
+	text-align: center;
+	float: left;
+	width: 98px;
+	height: 5%;
+	border: 1px solid #666;
+	margin-top: 1px;
+}
+.uq_money_blank{
+	box-sizing: border-box;
+	line-height: 23px;
+	font-size: 12px;
+	text-align: center;
+	float: left;
+	width: 67.3px;
+	height: 5%;
+	border: 1px solid #666;
+	margin-top: 1px;
+}
+.uq_receive_blank{
+	box-sizing: border-box;
+	line-height: 23px;
+	font-size: 12px;
+	text-align: center;
+	float: left;
+	width: 88.3px;
+	height: 5%;
+	border: 1px solid #666;
+	margin-top: 1px;
+}
+.uq_checkbox{
+	text-align:center;
+	vertical-align:middle;
+}

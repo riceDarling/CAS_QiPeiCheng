@@ -1,0 +1,49 @@
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/money_byreceive.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="mb_model_bg">
+    <div class="mb_model_text">按接收方汇总</div>
+    <div class="mb_model_content">
+        <div class="mb_top">
+            <div class="mb_top_button">
+                <input style="height:80%; margin-left: 20px; float: left;width: 30%;" type="button" value="明细" clickToPopup="money_byreceive_money_all_waybill" />
+                <input style="height:80%; margin-left: 20px; float: left;width: 30%" type="button" onclick="doPrint()" value="打印" />
+            </div>
+            <div class="mb_top_radio">
+                <input style="margin-top: 18px;" type="radio" name="one" id="rankbyShipper"/>按接收方排列
+                <input type="radio" name="one" id="rankbyTotal"/>按件数排列
+                <input type="radio" name="one" id="rankbyFreight"/>按运费排列
+                <input type="radio" name="one" id="rankbyModernCollection"/>按代收款排列
+            </div>
+            <div class="mb_top_button_exit">
+                <input style="height: 80%;margin-top: 8px;" type="button" value="退出" clickToClose />
+            </div>
+        </div>
+        <div class="mb_table">
+           <!--startprint-->
+        <h2>收款报表-按接收方汇总</h2>
+            <table id="moveTable" style="text-align: center;font-size: 12px;" border="1" width="100%" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td class="mb_table_receive">接收方</td>
+                        <td>笔数</td>
+                        <td>件数</td>
+                        <td>托运方付</td>
+                        <td class="mb_table_unpay">未付运费</td>
+                        <td>代收款</td>
+                        <td>退代收</td>
+                        <td>退回笔数</td>
+                        <td>退回件数</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <!--endprint-->
+        </div>
+    </div>
+</div>
+<script src="js/money_byreceive.js"></script>
+<script src="js/moveTable.js"></script>
+<script src="js/printTable.js"></script>

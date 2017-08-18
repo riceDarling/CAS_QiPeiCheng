@@ -1,0 +1,43 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/time.css" />
+<script src="js/jquery-1.11.0.js"></script>
+
+<div class="model_bg">
+    <div class="model_text">
+        按取货时间汇总
+    </div>
+    <div class="model_content">
+
+        <div class="t_one">
+            <span>
+				<input type="button" style="width:100px;height:30px" value="查询明细" clickToPopup="date"/>
+				<input style="width:100px;height:30px" type="button" value="打印" onclick="doPrint()"/>
+				<input type="button" style="width:100px;height:30px" name="" id="" value="退出" clickToClose/>
+			</span>
+        </div>
+        <div class="t_two">
+          <!--startprint-->
+          <h2>付代收款报表-按取货时间汇总</h2>
+            <table id="moveTable" width="100%" border="1" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td width="20%">取货日期时间</td>
+                        <td width="20%">代收款</td>
+                        <td width="20%">退货款</td>
+                        <td width="20%">手续费</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <!--endprint-->
+        </div>
+       <div class="t_three">
+		代收款合计: <input type=text style="width:80px" id="totalsum" disabled></input> 退货款合计: <input type=text style="width:80px" id="returnMoneysum"  disabled></input> 银行手续费: <input type=text style="width:60px" id="counterFeesum" disabled></input>
+		</div>
+    </div>
+</div>
+<script src="js/time.js"></script>
+<script src="js/moveTable.js"></script>
+<script src="js/printTable.js"></script>

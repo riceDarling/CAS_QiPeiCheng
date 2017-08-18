@@ -1,0 +1,53 @@
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/gather_receive.css" />
+<div class="gr_model_bg">
+	<div class="gr_model_text">按照托运方汇总</div>
+	<div class="gr_model_content">
+		<div class="gr_model_top">
+			<div class="gr_model_radio">
+				<input type="radio" name="one">按托运方排列</input>
+				<input type="radio" name="one">按件数排列</input>
+				<input type="radio" name="one">按运费排列</input>
+				<input type="radio" name="one">按代收款排列</input>
+				<input type="radio" name="one">按退货件数排列</input>
+			</div>
+			<div class="gr_model_button">
+				<input type="button" value="打印"/>
+				<input type="number" />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" value="退出" clickToClose />
+			</div>
+		</div>
+		<div class="gr_model_table">
+			<table style="text-align: center;font-size: 12px;" border="1" width="100%" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<td class="gr_table_date">托运方</td>
+						<td>笔数</td>
+						<td>件数</td>
+						<td>托运方付费</td>
+						<td>接收方付费/未付</td>
+						<td class="gr_table_money">全部代收款</td>
+						<td>退货额  件数  比率</td>
+						<td>实际代收款</td>
+						<td>在途件、代收款</td>
+						<td>未取件、代收款</td>
+						<td>已收件、代收款、还欠代收款</td>
+						<td>已付代收款</td>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+		</div>
+		<div class="gr_model_bottom">
+			<span style="margin-left: 80px;">查询<input type="text" /></span>
+			<span style="margin-left: 600px;">
+				<input type="button" value="全部明细<F2>"/>
+				<input type="button" value="在途明细<F3>"/>
+				<input type="button" value="未取明细<F4>"/>
+			</span>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,86 @@
+.operator_model_bg {
+	background-color: #6A8F97;
+	width: 950px;
+	height: 450px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.operator_model_text {
+	font-family: "微软雅黑";
+	font-size: 12px;
+	margin-top: 5px;
+	margin-left: 7px;
+	margin-bottom: 7px;
+	width: 260px;
+	height: 12px;
+}
+.o_model_content{
+	background-color: white;
+	width: 98%;
+	height: 90%;
+	border: 1px solid black;
+	margin: 0 auto;
+}
+.o_one {
+	width: 100%;
+	height: 10%;
+	font-size: 35px;
+	margin-left: 300px;
+	margin-bottom: 5px;
+}
+.o_two{
+	overflow: auto;
+	width: 85%;
+	height: 60%;
+	text-align: center;
+	float: left;
+}
+.o_two>table>thead td {
+	text-align: center;
+	line-height: 30px;
+	background-color: #F8FBFC;
+}
+.o_m{
+	width: 100%;
+	height: 100%;
+}
+.o_detail{
+	overflow: scroll;
+	width: 14%;
+	height: 60%;
+	border: 1px solid black;
+	float: right;
+}
+.o_model_button{
+	width: 25%;
+	height: 15%;
+	border: 1px solid black;
+	border-radius: 5px;
+	margin-top: 50px;
+	margin-left: 5px;
+	float: left;
+	
+}
+.o_model_button_up{
+	margin: 5px;
+	width: 40%;
+}
+.o_model_button_down{
+	width: 30%;
+	margin: 2px;
+}
+.o_model_remark{
+	width: 25%;
+	height: 15%;
+	margin-top: 50px;
+	margin-left: 5px;
+	float: left;
+}
+.o_model_button_esc{
+	width: 25%;
+	height: 15%;
+	margin-top: 50px;
+	margin-left: 5px;
+	margin-left: 20px;
+	float: left;
+}

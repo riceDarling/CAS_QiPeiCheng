@@ -1,0 +1,108 @@
+.dq_model_bg {
+    background-color: #6A8F97;
+    width: 950px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.dq_model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 7px;
+    margin-bottom: 7px;
+    width: 220px;
+    height: 12px;
+}
+
+.dq_model_content {
+    background-color: white;
+    width: 99%;
+    height: 95%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.dq_one {
+    width: 100%;
+    height: 20%;
+}
+
+.dq_one_left {
+    font-size: 12px;
+    float: left;
+    width: 70%;
+    height: 100%;
+}
+
+.dq_one_left_one {
+    margin-top: 4px;
+    width: 100%;
+    height: 27%;
+    text-align: right;
+}
+
+.dq_one_right {
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+.dq_two {
+    font-size: 12px;
+    width: 100%;
+    height: 65%;
+    overflow: auto;
+}
+
+.dq_two > table {
+    font-size: 14px;
+    white-space: nowrap;
+    border-collapse: collapse;
+}
+
+.dq_two > table,
+.dq_two > table td {
+    border: 1px solid #666;
+}
+
+.dq_two > table > thead td {
+    line-height: 30px;
+}
+
+.dq_two > table > tbody tr:hover {
+    background: #ccdddd;
+}
+
+.dq_two > table td {
+    padding: 2px 5px;
+}
+
+.dq_three {
+    width: 100%;
+    height: 15%;
+}
+
+.dq_three input[type="button"] {
+    width: 90px;
+    margin: 3px 4px;
+}
+
+
+.dq_one_right_one {
+    width: 100%;
+    text-align: left;
+}
+
+.dq_one_right_two {
+    margin-top: 6px;
+    text-align: left;
+}
+.dq_text{
+	width:90px;
+	height:23px;
+	vertical-align:middle;
+	margin-top:-3px;
+	border-size:2px;
+}

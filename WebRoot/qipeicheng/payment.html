@@ -1,0 +1,54 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/payment.css" />
+<div class="pm_model_bg">
+	<div class="pm_model_text">付代收款报表</div>
+	<div class="pm_model_content">
+		<div class="pm_one">
+			<div class="pm_one_one"></div>
+			<!--<div class="pm_one_two">
+				<span>按照付代收款日期、原发货地查询</span>
+			</div>-->
+			<div class="pm_one_two" style="font-size: xx-large;">
+				<span>物流托运付代收款汇总</span>
+			</div>
+			<!--<div class="pm_one_three">
+				<span style="color: red;">汽配城</span>
+			</div>-->
+		</div>
+		<div class="pm_two">
+			<div class="pm_two_one"></div>
+			<div class="pm_two_two">
+				<span>日&nbsp;期</span>
+				<input class="time_plugin_lv_onclick" id="startDate" time_plugin_lv_type="2" placeholder="点击输入日期" />
+				->
+				<input class="time_plugin_lv_onclick" id="endDate" time_plugin_lv_type="2" placeholder="点击输入日期" />
+			</div>
+			<div class="pm_two_three">
+				<span>发货地</span>
+				<select id="consignment" name="" style="width: 100px;">
+					<option value=""></option>
+				
+				</select>
+				<span>-></span>
+				<span>目的地</span>
+				<select id="destination" name="" style="width: 100px;">
+					<option value=""></option>
+					
+				</select>
+			</div>
+			<div class="pm_two_four">
+				<div class="pm_two_four_one">
+					<input type="button" value="按日期汇总" clickToPopup="bydate1" /><input type="button" value="按日期、发送方向汇总" clickToPopup="bydate&sd1" />
+				</div>
+				<div class="pm_two_four_one">
+					<!--<input type="button" value="查询" />-->
+					<input type="button" value="按托运方汇总" clickToPopup="byshipper1" /><input type="button" value="按托运方、发送方向汇总" clickToPopup="byshipper&sd1" /><input type="button" value="退出" clickToClose/>
+				</div>
+				<div class="pm_two_four_one">
+					<input type="button" value="付款明细" clickToPopup="payment_details"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/payment.js"></script>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/bottom.css" />
+		<link rel="stylesheet" href="css/time_plugin_lv.min.css" />
+		<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="js/time_plugin_lv.min.js"></script>
+		<script type="text/javascript" src="js/localsetting.js" ></script>
+		<script type="text/javascript" src="js/popupwindow.js"></script>
+		<title></title>
+	</head>
+
+	<body style="background-color: white;">
+		<!-- <span class="welcome"> 欢迎您<span id="username"></span>  </span> -->
+		<div class="s">
+			<div class="index_h1">
+				<img src="img/qipeicheng.png" style="vertical-align:middle;">
+					<span>正通物流配送有限公司管理系统</span>
+				
+			</div>
+			<div class="index_content">
+				<div class="index_content_one">
+					<div class="index_content_first_fill1" disabled></div>
+					<button class="index_content_first_button size" clickToPopup="custom_client">客户档案</button>
+					<div class="index_content_first_fill2" disabled>
+						<img src="img/arrow1.png" style="width:6px;height:100%"/>
+					</div>
+					<button class="index_content_first_button size" clickToPopup="consignment_bill_client" >登记接件</button>
+					<div class="index_content_first_fill3" disabled>
+						<img src="img/arrow1.png" style="width:6px;height:100%" />
+					</div>
+					<button class="index_content_first_button size" clickToPopup="date_query_client" >物流查询</button>
+					<div class="index_content_first_fill3" disabled>
+						<img src="img/arrow1.png" style="width:6px;height:100%" />
+					</div>
+					<button class="index_content_first_button size" clickToPopup="follow_query_client" >跟踪查询</button>
+				</div>
+				<div class="index_content_second">
+					<div class="index_h1_qipeicheng" disabled>
+						<div class="index_h1_qipeicheng_fill1">
+						<img src="img/arrow4.png" style="width:90px;margin-top:-4px;height:6px;vertical-align:middle;"><button disabled class="index_content_first_button size" style="width:116px;margin-top:40px;" clickToPopup="linemanage">线路管理</button><img src="img/arrow4.png" style="width:90px;margin-top:-4px;height:6px;vertical-align:middle;"><button disabled class="index_content_first_button size" style="width:116px;margin-top:40px;" clickToPopup="admin">管理员管理</button>
+						</div>
+					</div>
+					<div class="index_content_two">
+						<img src="img/arrow4.png" style="width:100%;height:6px" />
+					</div>
+					<div class="index_content_one">
+						<button class="index_content_first_button size" clickToPopup="loading_verification">核对装车</button>
+						<div class="index_content_first_fill3" disabled>
+							<img src="img/arrow1.png" style="width:6px;height:100%" />
+						</div>
+						<button class="index_content_first_button size" clickToPopup="loading_forms" >装车报表</button>
+					</div>
+					<div class="index_content_two">
+						<img src="img/arrow4.png" style="width:100%;height:6px" />
+					</div>
+					<div class="index_content_one">
+						<button class="index_content_first_button size" clickToPopup="uninstall_check">接车核对</button>
+						<div class="index_content_first_fill2" disabled>
+							<img src="img/arrow1.png" style="width:6px;height:100%" />
+						</div>
+						<button class="index_content_first_button size" clickToPopup="total_query" >综合报表</button>
+						<div class="index_content_first_fill3" disabled>
+							<img src="img/arrow1.png" style="width:6px;height:100%" />
+						</div>
+						<button class="index_content_first_button size" clickToPopup="gather_user_money" >代收款账户</button>
+					</div>
+					<div class="index_content_two">
+						<img src="img/arrow4.png" style="width:100%;height:6px" />
+					</div>
+					<div class="index_content_one">
+						<button class="index_content_first_button size" clickToPopup="input_transport_form">客户取件</button>
+						<div class="index_content_first_fill3" disabled>
+							<img src="img/arrow1.png" style="width:6px;height:100%" />
+						</div>
+						<button class="index_content_first_button size" clickToPopup="take_goods" >收款报表</button>
+					</div>
+				</div>
+				<div class="index_content_third">
+					<div class="index_content_third_up" disabled>
+						<div class="index_content_third_up_two">
+							<img src="img/arrow4.png" style="width:100%;height:6px" />
+						</div>
+						<div class="index_content_third_up_one" >
+							<div class="index_content_first_fill1" style="height: 130px;"></div>
+							<button class="index_content_first_button size" disabled clickToPopup="cm_input">代收款管理</button>
+							<div style="float:left; height:80px; margin:0 0 0 5px">
+								<img src="img/arrow3.png" style="width:6px;height:100%" />
+							</div>
+							<div style="float:right; height:80px; margin:0 5px 0 0">
+								<img src="img/arrow1.png" style="width:6px;height:100%" />
+							</div>
+						</div>
+					</div>
+					<div class="index_content_third_down" disabled> 
+						<div class="index_content_third_down_left">
+							<button class="index_content_first_button size" disabled clickToPopup="unpaid">欠代收款报表</button>
+						</div>
+						<div class="index_content_third_down_middle"></div>
+						<div class="index_content_third_down_right">
+							<button class="index_content_first_button size" disabled clickToPopup="payment">付代收款报表</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<select class="datalist" size="10">
+		</select>
+	</body>
+
+</html>
+<script src="js/index.js"></script>

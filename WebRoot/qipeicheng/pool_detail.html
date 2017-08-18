@@ -1,0 +1,47 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/date.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="model_bg">
+    <div class="model_text">
+        明细表
+    </div>
+    <div class="model_content">
+
+        <div class="da_one">
+            <!--<span>
+				<input type="button" value="查询" />
+			</span>-->
+            <span style="margin-left:30px; font-size:14px"></span>
+            <span style="margin-left:30px; font-size:14px"></span>
+            <span style="margin-left:30px; font-size:14px"></span>
+            <span>
+				<input type="button" style="width:100px;height:30px" name="" id="" value="退出" clickToClose/>
+			</span>
+        </div>
+        <div class="da_two">
+            <table id="moveTable" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td>目的店</td>
+                        <td>日期</td>
+                        <td>运单号</td>
+                        <td>接收方</td>
+                        <td>代收款</td>
+                        <td>退货款</td>
+                        <td>手续费</td>
+                        <td>应付额</td>
+                    </tr>
+                </thead>
+                <tbody id="secondPageTbody">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="da_three">
+		代收款合计: <input type=text style="width:80px" id="totalsum2" disabled></input> 退货款合计: <input type=text style="width:80px" id="returnMoneysum2"  disabled></input> 银行手续费: <input type=text style="width:60px" id="counterFeesum2" disabled></input>应付额合计: <input type=text style="width:60px" id="receiversum2" disabled></input>
+		</div>
+    </div>
+
+</div>
+<script src="js/pool_detail.js"></script>
+<script src="js/moveTable.js"></script>

@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qipeicheng.dao.FinanceDao">
+	<!-- 装车报表-未装车单 -->
+	<select id="loadingReportUnbound" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,d.runnum,c.shipper,c.receiver,d.total,a.shipperPay,a.receiverPay,a.collectionPayment,a.modernCollection,a.counterFee
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 AND d.status='1'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 装车报表-托运方付运费列表 -->
+	<select id="loadingReportShipper" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,d.runnum,c.shipper,c.receiver,d.total,a.freight,d.transportAtion,a.premium,
+		a.fee,a.serviceCharge,a.shipperPay,a.collectionPayment,a.modernCollection,a.counterFee,a.deliveryCharges,a.receiverPay,d.destination
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId = c.waybillId
+		LEFT
+		JOIN waybill d ON a.waybillId = d.id
+		WHERE 1 = 1 AND d.STATUS = '2'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		 ORDER BY d.wayDate desc
+	</select>
+	<!-- 装车报表-接收方付运费列表 -->
+	<select id="loadingReportReceiver" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,d.runnum,c.shipper,c.receiver,d.total,a.freight,d.transportAtion,a.premium,
+		a.fee,a.serviceCharge,a.shipperPay,a.collectionPayment,a.modernCollection,a.counterFee,a.deliveryCharges,a.receiverPay,d.destination
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId = c.waybillId
+		LEFT
+		JOIN waybill d ON a.waybillId = d.id
+		WHERE 1 = 1 AND d.STATUS = '2'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 代收款汇总-按托运地汇总 -->
+	<select id="forCollectionSumByConsignment" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		waybillId,SUM(collectionPayment)as
+		collectionPayment,SUM(modernCollection)as modernCollection,consignment
+		FROM (
+		SELECT
+		a.waybillId,a.collectionPayment,a.modernCollection,b.consignment FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId=b.id
+		WHERE (b.status='5' or b.status='6')  
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND a.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND a.wayDate &lt;= #{endDate}</if>
+		GROUP BY b.consignment,a.waybillId)
+		as tmp GROUP BY consignment 
+	</select>
+	<!-- 代收款汇总-按托运地汇总明细 -->
+	<select id="forCollectionSumByConsignmentInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.waybillId,a.collectionPayment,a.modernCollection,b.consignment FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId=b.id
+		WHERE (b.status='5' or b.status='6')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		GROUP BY b.consignment,a.waybillId ORDER BY b.wayDate desc
+	</select>
+	<!-- 代收款汇总-按接收地汇总 -->
+	<select id="forCollectionSumByDestination" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		waybillId,SUM(collectionPayment)as
+		collectionPayment,SUM(modernCollection)as modernCollection,destination
+		FROM (
+		SELECT
+		a.waybillId,a.collectionPayment,a.modernCollection,b.destination FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId=b.id
+		WHERE  (b.status='5' or b.status='6')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		GROUP BY b.destination,a.waybillId)
+		as tmp GROUP BY destination 
+	</select>
+	<!-- 代收款汇总-按接收地汇总明细 -->
+	<select id="forCollectionSumByDestinationInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.waybillId,a.collectionPayment,a.modernCollection,b.destination,c.receiver
+		FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId=b.id
+		LEFT JOIN
+		participant c ON a.waybillId=c.waybillId
+		WHERE  (b.status='5' or b.status='6')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		GROUP BY b.destination,a.waybillId ORDER BY b.wayDate desc
+	</select>
+	<!-- 代收款汇总-按托运方汇总 -->
+	<select id="forCollectionSumByShipper" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		waybillId,SUM(collectionPayment) as
+		collectionPayment,SUM(modernCollection) as
+		modernCollection,consignment,shipper
+		FROM (
+		SELECT
+		a.waybillId,a.collectionPayment,a.modernCollection,b.consignment,c.shipper
+		FROM payment a
+		LEFT JOIN waybill b ON
+		a.waybillId=b.id
+		LEFT JOIN
+		participant c ON a.waybillId=c.waybillId
+		WHERE  (b.status='5' or b.status='6')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		GROUP BY c.shipper,a.waybillId) as tmp GROUP BY shipper 
+	</select>
+	<!-- 代收款汇总-按托运方汇总明细 -->
+	<select id="forCollectionSumByShipperInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.waybillId,a.collectionPayment,a.modernCollection,b.consignment,c.shipper
+		FROM payment a
+		LEFT JOIN waybill b ON
+		a.waybillId=b.id
+		LEFT JOIN
+		participant c ON a.waybillId=c.waybillId
+		WHERE  (b.status='5' or b.status='6')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		GROUP BY c.shipper,a.waybillId ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-按托运方汇总 -->
+	<select id="receivingReportSumByShipper" parameterType="java.util.Map"
+	resultType="java.util.Map">
+	SELECT c.shipper,SUM(b.number)as number,SUM(b.total)as
+	total,SUM(a.freight)as freight,
+	SUM(a.shipperPay)as
+	shipperPay,SUM(a.receiverPay)as receiverPay ,
+	SUM(a.receiverArrears)as
+	receiverArrears,SUM(a.collectionPayment)as
+	collectionPayment,SUM(a.modernCollection)as modernCollection,
+	SUM(a.returnMoney)as returnMoney,SUM(a.returnGoods)as returnGoods
+	FROM
+	payment a
+	LEFT JOIN waybill b ON a.waybillId=b.id
+	LEFT JOIN
+	participant c
+	ON a.waybillId=c.waybillId
+	WHERE (b.status='4' or b.status='5')
+	<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+	<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+	<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+	<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+	<if test="shipper !=null &amp;&amp; shipper!=''">GROUP BY(c.shipper)</if>
+	<if test="total !=null &amp;&amp; total!=''">GROUP BY(b.total)</if>
+	<if test="freight !=null &amp;&amp; freight!=''">GROUP BY(a.freight)</if>
+	<if test="modernCollection !=null &amp;&amp; modernCollection!=''">GROUP BY(a.modernCollection)</if>
+	 ORDER BY b.wayDate desc
+</select>
+	<!--收款报表-按托运方汇总明细 -->
+	<select id="receivingReportSumByShipperInfos" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,b.runnum,c.shipper,c.receiver,b.number,b.total,a.shipperPay,a.freight,a.premium,a.fee,
+		a.serviceCharge,a.deliveryCharges,a.receiverPay,a.receiverArrears,a.collectionPayment,a.modernCollection,a.counterFee,a.returnMoney,b.consignment,b.destination
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId = b.id
+		LEFT JOIN
+		participant c ON a.waybillId = c.waybillId
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-按日期汇总 -->
+	<select id="receivingReportSumByDate" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,b.number,b.total,a.freight,
+		a.shipperPay,a.receiverPay,a.receiverArrears,a.collectionPayment,a.modernCollection,a.returnMoney,a.returnGoods
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId=b.id
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		 ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-按日期汇总明细 -->
+	<select id="receivingReportSumByDateInfos" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		a.id,
+		date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,
+		b.runnum,
+		c.shipper,
+		c.receiver,
+		b.number,
+		b.total,
+		a.shipperPay,
+		a.freight,
+		a.premium,
+		a.fee,
+		a.serviceCharge,
+		a.deliveryCharges,
+		a.receiverPay,
+		a.receiverArrears,
+		a.collectionPayment,
+		a.modernCollection,
+		a.counterFee,
+		a.returnMoney,
+		b.consignment,
+		b.destination
+		FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId = b.id
+		LEFT JOIN participant c ON a.waybillId = c.waybillId
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		 ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-全部运单列表 -->
+	<select id="getAllWaybillList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,
+		date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,
+		b.runnum,
+		c.shipper,
+		c.receiver,
+		b.number,
+		b.total,
+		a.shipperPay,
+		a.freight,
+		a.premium,
+		a.fee,
+		a.serviceCharge,
+		a.deliveryCharges,
+		a.receiverPay,
+		a.receiverArrears,
+		a.collectionPayment,
+		a.modernCollection,
+		a.counterFee,
+		a.returnMoney,
+		b.consignment,
+		b.destination
+		FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId = b.id
+		LEFT JOIN participant c ON a.waybillId= c.waybillId
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-托运方付运费列表 -->
+	<select id="getAllShipperPayList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,
+		date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,
+		b.runnum,
+		c.shipper,
+		c.receiver,
+		b.number,
+		b.total,
+		a.shipperPay,
+		a.freight,
+		a.premium,
+		a.fee,
+		a.serviceCharge,
+		a.deliveryCharges,
+		a.receiverPay,
+		a.receiverArrears,
+		a.collectionPayment,
+		a.modernCollection,
+		a.counterFee,
+		a.returnMoney,
+		b.destination
+		FROM
+		payment a
+		LEFT JOIN waybill b ON a.waybillId = b.id
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		 ORDER BY b.wayDate desc
+	</select>
+
+	<!--收款报表-按接收方汇总 -->
+	<select id="receivingReportSumByReceiver" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT c.receiver,SUM(b.number)as number,SUM(b.total)as total,SUM(a.freight)as freight,
+		SUM(a.shipperPay)as shipperPay,SUM(a.receiverPay)as receiverPay ,
+        SUM(a.receiverArrears)as receiverArrears,SUM(a.collectionPayment)as collectionPayment,SUM(a.modernCollection)as modernCollection,
+        SUM(a.returnMoney)as returnMoney,SUM(a.returnGoods)as returnGoods
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId=b.id
+		LEFT JOIN
+		participant c ON a.waybillId=c.waybillId
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		<if test="shipper !=null &amp;&amp; shipper!=''">GROUP BY(c.receiver)</if>
+		<if test="total !=null &amp;&amp; total!=''">GROUP BY(b.total)</if>
+		<if test="freight !=null &amp;&amp; freight!=''">GROUP BY(a.freight)</if>
+		<if test="modernCollection !=null &amp;&amp; modernCollection!=''">GROUP BY(a.modernCollection)</if>
+	    ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-按接收方汇总明细 -->
+	<select id="receivingReportSumByReceiverInfos" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		a.id,
+		date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,
+		b.runnum,
+		c.shipper,
+		c.receiver,
+		b.number,
+		b.total,
+		a.shipperPay,
+		a.freight,
+		a.premium,
+		a.fee,
+		a.serviceCharge,
+		a.deliveryCharges,
+		a.receiverPay,
+		a.receiverArrears,
+		a.collectionPayment,
+		a.modernCollection,
+		a.counterFee,
+		a.returnMoney,
+		b.consignment,
+		b.destination
+		FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId = b.id
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-按日期-方向汇总 -->
+	<select id="receivingReportSumByDateDirection" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT b.consignment,b.destination,date_format(b.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,b.number,b.total,a.freight,
+		a.shipperPay,a.receiverPay,a.receiverArrears,a.collectionPayment,a.modernCollection,a.returnMoney,a.returnGoods
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId=b.id
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-按日期-方向汇总明细 -->
+	<select id="receivingReportSumByDateDirectionInfos" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+		a.id,
+		date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,
+		b.runnum,
+		c.shipper,
+		c.receiver,
+		b.number,
+		b.total,
+		a.shipperPay,
+		a.freight,
+		a.premium,
+		a.fee,
+		a.serviceCharge,
+		a.deliveryCharges,
+		a.receiverPay,
+		a.receiverArrears,
+		a.collectionPayment,
+		a.modernCollection,
+		a.counterFee,
+		a.returnMoney,
+		b.consignment,
+		b.destination
+		FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId = b.id
+		LEFT JOIN participant c ON a.waybillId = c.waybillId
+		WHERE (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		 ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-退货列表 -->
+	<select id="getAllReturnList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,
+		date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,
+		b.runnum,
+		c.shipper,
+		c.receiver,
+		b.number,
+		b.total,
+		a.shipperPay,
+		a.freight,
+		a.premium,
+		a.fee,
+		a.serviceCharge,
+		a.deliveryCharges,
+		a.receiverPay,
+		a.receiverArrears,
+		a.collectionPayment,
+		a.modernCollection,
+		a.counterFee,
+		a.returnMoney,
+		b.destination
+		FROM
+		payment a
+		LEFT JOIN waybill b ON a.waybillId = b.id
+		LEFT JOIN participant c ON a.waybillId = c.waybillId
+		WHERE 1 = 1 and b.status='7'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+		 ORDER BY b.wayDate desc
+	</select>
+	<!--收款报表-接收方付运费列表 -->
+	<select id="getAllReceiverPayList" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,
+		date_format(b.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,
+		b.runnum,
+		c.shipper,
+		c.receiver,
+		b.number,
+		b.total,
+		a.shipperPay,
+		a.freight,
+		a.premium,
+		a.fee,
+		a.serviceCharge,
+		a.deliveryCharges,
+		a.receiverPay,
+		a.receiverArrears,
+		a.collectionPayment,
+		a.modernCollection,
+		a.counterFee,
+		a.returnMoney,
+		b.consignment,
+		b.destination
+		FROM
+		payment a
+		LEFT JOIN waybill b ON
+		a.waybillId = b.id
+		LEFT JOIN participant c ON a.waybillId = c.waybillId
+		WHERE  (b.status='4' or b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+	ORDER BY b.wayDate desc
+	</select>
+	<!-- 欠代收款报表-按取货时间汇总 -->
+	<select id="oweForColByDate" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT date_format(b.date,'%Y-%m-%d %H:%i:%s') as
+		date,a.collectionPayment,a.modernCollection,a.returnMoney,a.counterFee
+		FROM
+		payment a
+		LEFT JOIN logisticstracking b ON a.waybillId=b.waybillId
+		LEFT JOIN waybill d ON a.waybillId=d.id AND b.`status`=d.`status`
+		WHERE 1=1 and d.status='5'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.date &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.date &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY d.runnum ORDER BY b.date desc
+	</select>
+	<!--欠代收款报表-按取货时间汇总明细 -->
+	<select id="oweForColByDateInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		d.destination,date_format(b.date,'%Y-%m-%d %H:%i:%s') as
+		date,b.runnum,c.shipper,c.receiver,a.collectionPayment,a.modernCollection,a.returnMoney,a.receiverTotal,a.counterFee,a.receiverPay
+		FROM payment a
+		LEFT JOIN logisticstracking b ON a.waybillId=b.waybillId
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id AND b.`status`=d.`status` WHERE 1=1 and d.status='5'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.date &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.date &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY d.runnum ORDER BY b.date desc
+	</select>
+	<!--欠代收款报表-按托运方汇总 -->
+	<select id="oweForColByShipper" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		c.shipper,SUM(d.total)as total,SUM(a.collectionPayment)as collectionPayment,SUM(a.modernCollection)as modernCollection,SUM(a.counterFee)as counterFee
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='5'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY c.shipper ORDER BY d.wayDate desc
+	</select>
+	<!--欠代收款报表-按托运方汇总明细 -->
+	<select id="oweForColByShipperInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT d.destination,date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,d.runnum,c.receiver,a.collectionPayment,a.modernCollection,a.returnMoney,a.receiverTotal,a.counterFee,a.receiverPay
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='5'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!--欠代收款报表-明细表 -->
+	<select id="oweForColSchedule" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT d.consignment,d.destination,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,d.runnum,a.collectionPayment,a.modernCollection,a.returnMoney,a.receiverTotal,a.counterFee,a.receiverPay
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='5'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 欠代收款报表-明细表-根据运单号查询 -->
+	<select id="oweForColScheduleByRunnum" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT d.destination,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,b.runnum,a.collectionPayment,a.modernCollection,a.returnMoney,a.receiverTotal,a.counterFee,a.receiverPay
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id
+		WHERE 1=1 and d.status='5' AND b.runnum=#{runnum}
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 付代收款报表-按日期汇总 -->
+	<select id="payforColByDate" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT date_format(c.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,a.collectionPayment,a.modernCollection,a.counterFee,a.paid FROM
+		payment a
+		LEFT JOIN waybill c ON a.waybillId=c.id
+		WHERE 1=1 and c.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND c.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND c.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND c.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND c.destination= #{destination}</if>
+		ORDER BY c.wayDate desc
+	</select>
+	<!-- 付代收款报表-按日期汇总明细 -->
+	<select id="payforColByDateInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT d.destination,date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,c.shipper,c.receiver,d.runnum,a.collectionPayment,a.modernCollection,a.counterFee,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 付代收款报表-按日期发送方向汇总 -->
+	<select id="payforColByDateDirection" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT d.consignment,d.destination,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,a.collectionPayment,a.modernCollection,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN waybill d ON a.waybillId=d.id WHERE 1=1 and d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 付代收款报表-按日期发送方向汇总明细 -->
+	<select id="payforColByDateDirectionInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT d.destination,date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,c.shipper,c.receiver,d.runnum,a.collectionPayment,a.modernCollection,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 付代收款报表-按托运方汇总 -->
+	<select id="payforColByShipper" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		c.shipper,SUM(d.total)as total,SUM(a.collectionPayment)as collectionPayment,SUM(a.modernCollection)as modernCollection,SUM(a.counterFee)as counterFee,SUM(a.receiverPay)as receiverPay,SUM(a.paid)as paid,f.customerContacts,f.bankCard
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d ON a.waybillId=d.id
+		LEFT JOIN customer f ON c.shipper=f.customerName 
+		WHERE
+		1=1 and d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY c.shipper 
+	</select>
+	<!-- 付代收款报表-按托运方汇总明细 -->
+	<select id="payforColByShipperInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT d.total,d.destination,date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,c.receiver,d.runnum,a.collectionPayment,a.modernCollection,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 付代收款报表-按托运方发送方向汇总 -->
+	<select id="payforColByShipperDirection" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		c.shipper,SUM(d.total)as total,SUM(a.collectionPayment)as collectionPayment,SUM(a.modernCollection)as modernCollection,SUM(a.counterFee)as counterFee,SUM(a.receiverPay)as receiverPay,SUM(a.paid)as paid,d.consignment
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY c.shipper 
+	</select>
+	<!-- 付代收款报表-按托运方发送方向汇总明细 -->
+	<select id="payforColByShipperDirectionInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT d.consignment,d.destination,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.receiver,d.runnum,a.collectionPayment,a.modernCollection,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 付代收款报表-付款明细 -->
+	<select id="payforColPaymentDetail" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,d.runnum,c.shipper,c.receiver,a.collectionPayment,a.modernCollection,a.counterFee,a.receiverPay,a.paid,d.consignment,d.destination
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		ORDER BY d.wayDate desc
+	</select>
+	<!-- 付代收款报表-付款明细 -根据运单号查询 -->
+	<select id="payforColPaymentDetailByRunnum" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT date_format(d.wayDate,'%Y-%m-%d %H:%i:%s') as
+		date,d.runnum,c.shipper,c.receiver,a.collectionPayment,a.modernCollection,a.counterFee,a.receiverPay,a.paid,d.consignment,d.destination
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 and d.status='6'
+		AND d.runnum=#{runnum}
+		ORDER BY d.wayDate desc
+	</select>
+	<!--代收款管理-根据运单号得到托运代收款信息 -->
+	<select id="getForColInfosByRunnum" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.runnum,a.consignment,date_format(d.date,'%Y-%m-%d %H:%i:%s') as
+		date,d.information,b.freight,b.premium,b.deliveryCharges,b.collectionPayment,b.modernCollection,b.receiverTotal,b.counterFee,b.paid,b.receiverArrears,a.remarks,
+		c.shipper,c.shipperAddress,c.shipperPhone,c.shipperContacts,c.receiver,c.receiverAddress,c.receiverPhone,c.receiverContacts
+		FROM waybill a
+		LEFT JOIN payment b ON a.id=b.waybillId
+		LEFT JOIN
+		participant c ON b.waybillId=c.waybillId
+		LEFT JOIN logisticstracking d
+		ON a.id=d.waybillId
+		WHERE 1=1 AND a.status='5' AND a.runnum=#{runnum}
+		GROUP BY a.runnum ORDER BY d.date desc
+	</select>
+	<!-- 综合报表-收件汇总 -->
+	<select id="synthesizeReportPickup" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT SUM(b.number)as number,SUM(b.total)as total,SUM(a.freight)as freight,SUM(a.fee) as
+		fee,SUM(a.serviceCharge) as serviceCharge,
+		SUM(a.premium) as premium,
+		SUM(a.shipperPay) as shipperPay,
+		SUM(a.deliveryCharges) as
+		deliveryCharges,SUM(a.receiverPay) as receiverPay,
+		SUM(a.paid) as
+		paid,SUM(a.receiverArrears) as
+		receiverArrears,SUM(a.receiverTotal) as
+		receiverTotal,
+		SUM(a.collectionPayment) as
+		collectionPayment,SUM(a.modernCollection)
+		as
+		modernCollection,SUM(a.counterFee) as counterFee,SUM(a.returnMoney)
+		as
+		returnMoney
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId=b.id
+		WHERE
+		1=1 AND
+		b.status='1'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+	</select>
+	<!-- 综合报表-收件汇总明细 -->
+	<select id="synthesizeReportPickupInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		d.consignment,d.destination,d.network,d.runnum,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,d.total,d.weight,a.shipperPay,SUM(a.freight+a.fee+a.serviceCharge+a.premium)as
+		cost,a.collectionPayment,a.modernCollection,a.returnMoney,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 AND d.status='1'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY d.runnum ORDER BY d.wayDate desc
+	</select>
+	<!-- 综合报表-装车汇总 -->
+	<select id="synReportLoading" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT SUM(b.number)as number,SUM(b.total)as total,SUM(a.freight)as freight,SUM(a.fee) as
+		fee,SUM(a.serviceCharge) as serviceCharge,
+		SUM(a.premium) as premium,
+		SUM(a.shipperPay) as shipperPay,
+		SUM(a.deliveryCharges) as
+		deliveryCharges,SUM(a.receiverPay) as receiverPay,
+		SUM(a.paid) as
+		paid,SUM(a.receiverArrears) as
+		receiverArrears,SUM(a.receiverTotal) as
+		receiverTotal,
+		SUM(a.collectionPayment) as
+		collectionPayment,SUM(a.modernCollection)
+		as
+		modernCollection,SUM(a.counterFee) as counterFee,SUM(a.returnMoney)
+		as
+		returnMoney
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId=b.id
+		WHERE
+		1=1 AND
+		b.status='2'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+	</select>
+	<!-- 综合报表-装车汇总明细 -->
+	<select id="synReportLoadingInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		d.consignment,d.destination,d.network,d.runnum,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,d.total,d.weight,a.shipperPay,SUM(a.freight+a.fee+a.serviceCharge+a.premium)as
+		cost,a.collectionPayment,a.modernCollection,a.returnMoney,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 AND d.status='2'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY d.runnum ORDER BY d.wayDate desc
+	</select>
+	<!-- 综合报表-卸车汇总 -->
+	<select id="synReportUpload" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT SUM(b.number)as number,SUM(b.total)as total,SUM(a.freight)as freight,SUM(a.fee) as
+		fee,SUM(a.serviceCharge) as serviceCharge,
+		SUM(a.premium) as premium,
+		SUM(a.shipperPay) as shipperPay,
+		SUM(a.deliveryCharges) as
+		deliveryCharges,SUM(a.receiverPay) as receiverPay,
+		SUM(a.paid) as
+		paid,SUM(a.receiverArrears) as
+		receiverArrears,SUM(a.receiverTotal) as
+		receiverTotal,
+		SUM(a.collectionPayment) as
+		collectionPayment,SUM(a.modernCollection)
+		as
+		modernCollection,SUM(a.counterFee) as counterFee,SUM(a.returnMoney)
+		as
+		returnMoney
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId=b.id
+		WHERE
+		1=1 AND
+		b.status='3'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+
+	</select>
+	<!-- 综合报表-卸车汇总明细 -->
+	<select id="synReportUploadInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		d.consignment,d.destination,d.network,d.runnum,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,d.total,d.weight,a.shipperPay,SUM(a.freight+a.fee+a.serviceCharge+a.premium)as
+		cost,a.collectionPayment,a.modernCollection,a.returnMoney,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 AND d.status='3'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY d.runnum ORDER BY d.wayDate desc
+	</select>
+	<!-- 综合报表-取件汇总 -->
+	<select id="synReportTake" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT SUM(b.number)as number,SUM(b.total)as total,SUM(a.freight)as freight,SUM(a.fee) as
+		fee,SUM(a.serviceCharge) as serviceCharge,
+		SUM(a.premium) as premium,
+		SUM(a.shipperPay) as shipperPay,
+		SUM(a.deliveryCharges) as
+		deliveryCharges,SUM(a.receiverPay) as receiverPay,
+		SUM(a.paid) as
+		paid,SUM(a.receiverArrears) as
+		receiverArrears,SUM(a.receiverTotal) as
+		receiverTotal,
+		SUM(a.collectionPayment) as
+		collectionPayment,SUM(a.modernCollection)
+		as
+		modernCollection,SUM(a.counterFee) as counterFee,SUM(a.returnMoney)
+		as
+		returnMoney
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId=b.id
+		WHERE
+		(b.status='4' OR b.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+
+	</select>
+	<!-- 综合报表-取件汇总明细 -->
+	<select id="synReportTakeInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		d.consignment,d.destination,d.network,d.runnum,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,d.total,d.weight,a.shipperPay,SUM(a.freight+a.fee+a.serviceCharge+a.premium)as
+		cost,a.collectionPayment,a.modernCollection,a.returnMoney,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE (d.status='4' OR d.status='5')
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY d.runnum ORDER BY d.wayDate desc
+	</select>
+	<!-- 综合报表-付代收款汇总 -->
+	<select id="synReportPayforCol" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT SUM(b.number)as number,SUM(b.total)as total,SUM(a.freight)as freight,SUM(a.fee) as
+		fee,SUM(a.serviceCharge) as serviceCharge,
+		SUM(a.premium) as premium,
+		SUM(a.shipperPay) as shipperPay,
+		SUM(a.deliveryCharges) as
+		deliveryCharges,SUM(a.receiverPay) as receiverPay,
+		SUM(a.paid) as
+		paid,SUM(a.receiverArrears) as
+		receiverArrears,SUM(a.receiverTotal) as
+		receiverTotal,
+		SUM(a.collectionPayment) as
+		collectionPayment,SUM(a.modernCollection)
+		as
+		modernCollection,SUM(a.counterFee) as counterFee,SUM(a.returnMoney)
+		as
+		returnMoney
+		FROM payment a
+		LEFT JOIN waybill b ON a.waybillId=b.id
+		WHERE
+		1=1 AND
+		b.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND b.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND b.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND b.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND b.destination= #{destination}</if>
+
+	</select>
+	<!-- 综合报表-付代收款汇总明细 -->
+	<select id="synReportPayforColInfos" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		d.consignment,d.destination,d.network,d.runnum,date_format(d.wayDate,'%Y-%m-%d
+		%H:%i:%s') as
+		date,c.shipper,c.receiver,d.total,d.weight,a.shipperPay,SUM(a.freight+a.fee+a.serviceCharge+a.premium)as
+		cost,a.collectionPayment,a.modernCollection,a.returnMoney,a.counterFee,a.receiverPay,a.paid
+		FROM payment a
+		LEFT JOIN participant c ON a.waybillId=c.waybillId
+		LEFT JOIN waybill d
+		ON a.waybillId=d.id WHERE 1=1 AND d.status='6'
+		<if test="startDate !=null &amp;&amp; startDate!=''">AND d.wayDate &gt;= #{startDate}</if>
+		<if test="endDate !=null &amp;&amp; endDate!=''">AND d.wayDate &lt;= #{endDate}</if>
+		<if test="consignment !=null &amp;&amp; consignment!=''">AND d.consignment= #{consignment}</if>
+		<if test="destination !=null &amp;&amp; destination!=''">AND d.destination= #{destination}</if>
+		GROUP BY d.runnum ORDER BY d.wayDate desc
+	</select>
+</mapper>

@@ -1,0 +1,145 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/date_query.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="dq_model_bg">
+    <div class="dq_model_text">物流运输---物流查询(按照开单日期查询)</div>
+    <div class="dq_model_content">
+        <div class="dq_one">
+            <div class="dq_one_left">
+                <div class="dq_one_left_one">
+                    <span style="margin-left: 20px;">开单日期</span>
+                    <span>
+						<input class="time_plugin_lv_onclick" time_plugin_lv_type="2" subID="startDate" id="startDate" />
+						->
+						<input class="time_plugin_lv_onclick" time_plugin_lv_type="2" subID="endDate" id="endDate" />
+					</span>
+                    <span style="margin-left: 25px;"> 状态
+						<select style="font-size: 12px; width: 100px;" subID="status" subtype="changeVal" id="status">
+						<option value="0">0：全部</option>
+						<option value="1">1：未装车</option>
+						<option value="2">2：已装车在途中（未卸车）</option>
+						<option value="3">3：已卸车（还未取货）</option>
+						<option value="4">4：取货（没有代收款）</option>
+						<option value="5">5：取货（ 还未付代收款）</option>
+						<option value="6">6：已付代收款</option>
+                        <option value="7">7：退货（不含退单）</option>
+                       <!--  <option value="8">8：退货（含退单）</option> -->
+						</select>
+					</span>
+
+                </div>
+                <div class="dq_one_left_one">
+                    <span style="margin-left: 20px;">托运地
+							<select name=""  style="width: 90px;" subID="consignmentPlaceId" subtype="changeText" id="consignmentPlaceId" getRegion>
+								<option>  </option>
+								<!-- <option value="2">北辰专线</option>
+								<option value="3">津南黄专线</option> -->
+							</select>
+							</span>
+                    <span>
+					<input type="checkbox" name="" value="" clickToAllow="network">
+					<span>选择协作方</span>
+                    <select style="width: 80px;" subID="network" subtype="changeVal" id="network" disabled>
+						<option value=""></option>
+						<option value="0">网络协作</option>
+					</select>
+                    <input type="checkbox" name="" value="" clickToAllow="consignmentName">
+                    <span>选择托运方</span>
+                    <input type="text" subID="consignmentName" id="consignmentName" disabled/>
+                    </span>
+                </div>
+                <div class="dq_one_left_one">
+
+                    <span style="margin-left: 20px;"><span>目的地</span>
+                    <select name="" style="width: 90px;" subID="destinationId" subtype="changeText" id="destinationId" getRegion>
+								<option value=""></option>
+							</select>
+                    </span>
+                    <span>
+						<input type="checkbox" style="margin-left:6px;margin-right:5px;" id="allconsignment" clickToForbidden="destinationId"><span>全部托运地</span>
+
+                    <span style="margin-left:37px;">
+							<input type="checkbox" name="" value="" clickToAllow="receivingName">
+							选择收件方
+						</span>
+                    <input type="text" subID="receivingName" id="receivingName" disabled/>
+                    </span>
+                </div>
+            </div>
+            <div class="dq_one_right">
+                <div class="dq_one_right_one">
+                    <input type="button" value="退出" style="width:80px; height: 24px; margin-left: 10px; margin-top: 3px;" clickToClose/>
+                </div>
+                <div class="dq_one_right_two">
+                    <input type="button" value="查询" id="query" style="width:80px; height: 50px; margin-left: 10px;" />
+                </div>
+            </div>
+        </div>
+        <div class="dq_two">
+            <!--startprint-->
+            <table id="moveTable" border="1" cellpadding="0" cellspacing="0" selectlist>
+                <thead>
+                    <tr>
+                        <td>托运地</td>
+                        <td>目的地</td>
+                        <td>协作方</td>
+                        <td>运单号</td>
+                        <td>日期</td>
+                        <td>托运方</td>
+                        <td>收件方</td>
+                        <td>笔数</td>
+                        <td>件数</td>
+                        <td>重量/Kg</td>
+                        <td>托方付费</td>
+                        <td>运费</td>
+                        <td>工本费</td>
+                        <td>服务费</td>
+                        <td>保险费</td>
+                        <td>接方付费</td>
+                        <td>代收款</td>
+                        <td>退货款</td>
+                        <td>装车</td>
+                        <td>卸车</td>
+                        <td>取货</td>
+                        <td>交代收款</td>
+                        <td>收方未付</td>
+                        <td>接收方付</td>
+                        <td>付代收款</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <!--endprint-->
+        </div>
+        <div class="dq_three">
+        <div style="height:28px;width:100%">笔数合计: <input type=text style="width:130px" id="numbersum" disabled></input> 件数合计: <input type=text style="width:130px" id="totalsum" disabled></input> 
+        代收款合计: <input type=text style="width:130px" id="total"  disabled></input>
+      接收方付费合计: <input type=text style="width:130px" id="receivetotal"  disabled></input>    
+        </div>
+            <span>
+            			<input type="text" id="filter" value="" placeholder="运单号过滤" class="dq_text"/>
+						<input type="button" value="删除" id="delete" class="dq_button_down"/>
+						<input type="button" value="重新打印" class="dq_button_down1"
+                               onclick="doPrint()"/>
+						<input type="button" value="跟踪查询" class="dq_button_down1" clickToPopup="follow_query"/>
+						<input type="button" value="退一步操作" id="fallback" class="dq_button_down"/> 
+						<input type="button" value="修改代收款" class="dq_button_down1" clickToPopup="modify_gathering" />
+						<input type="button" value="修改托运方" class="dq_button_down1"clickToPopup="update_consign"/>
+						<input type="button" value="修改收件方" class="dq_button_down1" clickToPopup="update_receive"/>
+						<input type="button" value="打印明细" class="dq_button_down1" onclick="doPrint()"/>
+						<!-- <input type="button" value="打印汇总" class="dq_button_down1" onclick="doPrint()"/><br /> -->
+					<!-- 	<input type="button" value="汇总分析1" class="dq_button_down1" clickToPopup="gather_consignpeople_money"/>
+						<input type="button" value="汇总分析2" class="dq_button_down1" clickToPopup="gather_receive_detail_button"/>
+						<input type="button" value="汇总分析3" class="dq_button_down2" clickToPopup="gather_consign_detail_button"/>
+						<input type="button" value="转为托运方付" class="dq_button_down1" />
+						<input type="button" value="作禁止付标记" class="dq_button_down1"/>
+						<input type="button" value="退一步操作" class="dq_button_down1"/> -->
+					</span>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/date_query.js"></script>
+<script src="js/moveTable.js"></script>
+<script src="js/printTable.js"></script>

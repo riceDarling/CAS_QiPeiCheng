@@ -1,0 +1,63 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/loading_forms.css">
+    <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+</head>
+
+<body>
+    <div class="lf_model_bg">
+        <div class="lf_model_text">综合报表</div>
+        <div class="lf_model_content">
+            <div class="lf_one">
+                <div class="lf_one_one"></div>
+                <div class="lf_one_two">
+                    <span>物流托运装车报表</span>
+                </div>
+            </div>
+            <div class="lf_two">
+                <div class="lf_two_one"></div>
+                <div class="lf_two_two">
+                    <span style="margin-left: 50px;">日&nbsp;&nbsp;期</span>
+
+                    <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" id="startDate" placeholder="点击输入日期" subid="startDate"> -&gt;
+                    <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" id="endDate" placeholder="点击输入日期" subid="endDate">
+
+                </div>
+                <div class="lf_two_three">
+                    <span style="margin-left: 60px;">托运地</span>
+                    <select name="" style="width: 100px;" subid="shipperAddress" id="shipperAddress">
+                        <option value=""></option>
+                    </select>-&gt;<span>目的地</span>
+                    <select name="" style="width: 100px;" id="getRegion" subid="destination">
+                    	<option value=""></option>
+                    </select>
+
+                </div>
+                <div>
+
+                    <div id="button1"><button style="width:180px;  height:30px; margin-top:5px;" clickToPopup="readyup_upcar">未装车单《A》</button></div>
+                    <div id="button2"><button style="width:180px;  height:30px; margin-top:5px;" clickToPopup="loadup_freight">托运方付运费列表《S》</button></div>
+                    <div id="button3"><button style="width:180px;  height:30px; margin-top:5px;" clickToPopup="client_pay_list">接收方付费列表《D》</button></div>
+                    <div id="button4"><input type="button" style="width:180px;  height:30px; margin-top:5px;" value="退出" clicktoclose=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/loading_forms.js"></script>
+<script>
+$(document).keyup(function(e){
+	var currKey=0,e=e||event;   
+    currKey=e.keyCode||e.which||e.charCode;   
+    var keyName = String.fromCharCode(currKey); 
+	if (currKey==65){ 
+        $("[clickToPopup='readyup_upcar']").click();
+      } 
+	else if(currKey==83){ 
+        $("[clickToPopup='loadup_freight']").click();
+    } 
+	else if(currKey==68){ 
+        $("[clickToPopup='client_pay_list']").click();
+    } 
+});
+</script>

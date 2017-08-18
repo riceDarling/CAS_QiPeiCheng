@@ -1,0 +1,24 @@
+.bg_style {
+	background-color: #6A8F97;
+	width:500px;
+	height: 160px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.Content {
+	background-color: white;
+	width: 98%;
+	height: 80%;
+	border: 1px solid black;
+	margin: 0 auto;
+}
+.Sheet{
+	position: relative;
+	top:10px;
+	left:0px;
+}
+#Button{	
+	position: relative;
+	top:-40px;
+	left:0px;
+}

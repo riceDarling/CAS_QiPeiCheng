@@ -1,0 +1,90 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/follow_query.css" />
+<div class="fq_model_bg">
+	<div class="fq_model_text">托运跟踪查询</div>
+	<div class="fq_model_content">
+		<div class="fq_one">
+			<span style="margin-left: 140px;">运单号 
+			  		<input type="text" id="runnum"/> 
+			  		<input style="width:100px;height:30px" type="button" value="查询"  onclick="followQuert()" />
+			 </span>
+			<span style="margin-left: 30px;">
+			  		<input style="width:100px;height:30px" type="button" value="退出" clickToClose/>
+			  	</span>
+		</div>
+
+		<div class="fq_two">
+			<div class="fq_two_one">
+				<span>运单号</span>
+				<span>日期</span>
+				<span>状态信息</span>
+				<span id="Operator">操作员</span>
+			</div>
+			<div class="fq_two_two">
+				<table border="0" cellspacing="0" id="followTable">
+					
+					
+				</table>
+			</div>
+		</div>
+
+		<div class="fq_three">
+
+			<div class="fq_three_one">
+				<div class="fq_three_model">
+					<span style="margin-left: 20px;">发货地</span>
+					<input type="text" id="shipperAddress"/>
+				</div>
+				<div class="fq_three_model1">
+					<span style="margin-left: 20px;">发货方</span>
+					<input type="text" id="shipper"/>
+				</div>
+				<div class="fq_three_model1">
+					<span style="margin-left: 20px;">联系</span>
+					<input type="text" id="shipperPhone"/>
+				</div>
+				<div class="fq_three_model1">
+					<span style="margin-left: 20px;">发货方付</span>
+					<input type="text" id="shipperPay"/>
+				</div>
+				<div class="fq_three_model1">
+					<span style="margin-left: 20px;">代收款</span>
+					<input type="text" id="agencyFund"/>
+				</div>
+				<!--
+					<div class="fq_three_model1">
+						<span style="margin-left: 20px;">退货</span>
+						<input type="text" />
+					</div>
+				-->
+				
+			</div>
+			<div class="fq_three_two">
+				<div class="fq_three_model">
+					<span style="margin-left: 20px;">目的地</span>
+					<input type="text" id="receivingAddress"/>
+				</div>
+				<div class="fq_three_model1">
+					<span style="margin-left: 20px;">收件方</span>
+					<input type="text" id="receiving"/>
+				</div>
+				<div class="fq_three_model1">
+					<span style="margin-left: 20px;">联系</span>
+					<input type="text" id="receivingPhone"/>
+				</div>
+				<div class="fq_three_model1">
+					<span style="margin-left: 20px;">收件方付</span>
+					<input type="text" id="receivingPay">
+				</div>
+				<div class="fq_three_model1">
+					<span style="margin-left: 20px;">备注</span>
+					<input type="text" style="height: 43px;" id="remarks"/>
+				</div>
+			</div>
+			<!--<div class="fq_three_three">
+                <input type="button" value="付代收款退回" style="padding:3px;margin-top:70px;" />
+            </div>-->
+		</div>
+	</div>
+</div>
+<script src="js/follow_query_client.js"></script>

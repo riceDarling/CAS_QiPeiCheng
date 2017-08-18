@@ -1,0 +1,70 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/loadup_freight.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="bg_style">
+	<div class="Text">接收方付费列表</div>
+	<div class="Content">
+		<div id="quit">
+			<button style="width:100px;height:30px" clickToClose>退出</button>
+		</div>
+		<div id="Print">
+			<button  style="width:100px;height:30px" onclick="doPrint()">打印</button>
+		</div>
+		<div class="Sheet">
+			<!--startprint-->
+			<h2>装车报表-按接收方付费</h2>
+			<table id="moveTable" border="1" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<td width="30px">序号</td>
+						<td width="90px">日期</td>
+						<td width="70px">运单号</td>
+						<td width="70px">托运方</td>
+						<td width="80px">接收方</td>
+						<td width="60px">件数</td>
+						<td width="50px">托运方付</td>
+						<td width="50px">运费</td>
+						<td width="50px">保险费</td>
+						<td width="60px">工本费</td>
+						<td width="60px">服务费</td>
+						<td width="60px">代收款</td>
+						<td width="60px">手续费</td>
+						<td width="60px">送货费</td>
+						<td width="60px">接收方付</td>
+						<td width="60px">目的地</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<!--endprint-->
+		</div>
+		<!-- <div id="total">
+            合计：
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>&nbsp;
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>&nbsp;
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>&nbsp;
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>&nbsp;
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>&nbsp;&nbsp;
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>&nbsp;&nbsp;&nbsp;
+            </div>
+            <div style="display: inline;"> <input id="" style="width: 60px;" type="text"></input>
+            </div>
+        </div> -->
+	</div>
+</div>
+</div>
+<script src="js/client_pay_list.js"></script>
+<script src="js/moveTable.js"></script>
+<script src="js/printTable.js"></script>

@@ -1,0 +1,101 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/cm_input.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="ci_model_bg">
+	<div class="ci_model_text">代收款管理</div>
+	<div class="ci_model_content">
+		<div class="ci_title">
+			<span>物流托运代收款管理</span>
+		</div>
+		<div class="ci_one">
+			<div class="ci_one_one">
+				<div class="ci_model_name">运单号</div>
+				<div class="ci_model_value2 borderright">
+					<input type="text" name="" id="runnum" value="" style="width: 110px;margin-left:5px;margin-top:3px;" />
+				</div>
+				<div id="alerta" class="redalert" style="display:none;" >运单号错误或已付代收款或无代收款！</div>
+				<div id="alertb" class="redalert" style="display:none;" >警告：接收方错误！</div>
+				<div id="alertc" class="redalert" style="display:none;" >警告：运单号重复！</div>
+				<span>取货时间</span> <input type="text" id="time" readonly="true" />
+			</div>
+			<div class="ci_one_one">
+				<div class="ci_model_name">托运方</div>
+				<div class="ci_model_value">
+					<input type="text" class="ci_model_text1" id="shipper" />
+				</div>
+				<div class="ci_model_name">收件方</div>
+				<div class="ci_model_value borderright">
+					<input type="text" class="ci_model_text1" id="receiver" />
+				</div>
+			</div>
+			<div class="ci_one_one">
+				<div class="ci_model_name">地&nbsp;&nbsp;址</div>
+				<div class="ci_model_value">
+					<input type="text" class="ci_model_text1" id="shipperAddress" />
+				</div>
+				<div class="ci_model_name">地&nbsp;&nbsp;址</div>
+				<div class="ci_model_value borderright">
+					<input type="text" class="ci_model_text1" id="receiverAddress" />
+				</div>
+			</div>
+			<div class="ci_one_one">
+				<div class="ci_model_name">电&nbsp;&nbsp;话</div>
+				<div class="ci_model_value">
+					<input type="text" class="ci_model_text1" id="shipperPhone" />
+				</div>
+				<div class="ci_model_name">电&nbsp;&nbsp;话</div>
+				<div class="ci_model_value borderright">
+					<input type="text" class="ci_model_text1" id="receiverPhone" />
+				</div>
+			</div>
+			<div class="ci_one_one">
+				<div class="ci_model_name">联系人</div>
+				<div class="ci_model_value">
+					<input type="text" class="ci_model_text1" id="shipperContacts" />
+				</div>
+				<div class="ci_model_name">联系人</div>
+				<div class="ci_model_value borderright">
+					<input type="text" class="ci_model_text1" id="receiverContacts" />
+				</div>
+			</div>
+			<div class="ci_one_one">
+				<div class="ci_model_name borderbottom">备&nbsp;&nbsp;注</div>
+				<div class="ci_model_value1">
+					<input type="text" class="ci_model_text2" id="remarks" />
+				</div>
+			</div>
+		</div>
+		<div class="ci_two">
+		<!--startprint-->
+			<table width="100%" border="1" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<td>序号</td>
+						<td>运单号</td>
+						<td>目的地</td>
+						<td>接收方</td>
+						<td>日期</td>
+						<td>代收款</td>
+						<td>手续费</td>
+						<td>接收方合计</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+				 <tfoot>
+					<tr>
+						<td colspan="8" style="text-align:right">合计: <input type=text style="width:100px" id="total" disabled></input>银行手续费: <input type=text style="width:90px" id="poindage" disabled></input> 剩余: <input type=text style="width:100px" id="residu" disabled></input>
+						</td>
+					</tr>
+				</tfoot> 
+			</table>
+			  <!--endprint-->
+		</div>
+		<div class="ci_three">
+			<!-- <span style="margin-left: 300px;"><input type="button" value="打印" id="print" onclick="doPrint()"/>
+			</span>  --><input style="margin-left: 50px;width:100px;height:40px" type="button" value="付代收款" id="wait_pay_btn" /><input style="margin-left: 50px;width:100px;height:40px" type="button" value="退出" clickToClose />
+		</div>
+	</div>
+</div>
+<script src="js/cm_input.js"></script>
+<script src="js/printTable.js"></script>

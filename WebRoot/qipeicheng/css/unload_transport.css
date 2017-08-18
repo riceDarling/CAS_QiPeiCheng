@@ -1,0 +1,94 @@
+.ut_model_bg {
+	background-color: #6A8F97;
+	width: 950px;
+	height: 450px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.ut_model_text {
+	font-family: "微软雅黑";
+	font-size: 12px;
+	margin-top: 5px;
+	margin-left: 7px;
+	margin-bottom: 7px;
+	width: 260px;
+	height: 12px;
+}
+.ut_model_content{
+	background-color: white;
+	width: 98%;
+	height: 90%;
+	border: 1px solid black;
+	margin: 0 auto;
+}
+.ut_top_text{
+	height: 10%;
+	width: 50%;
+	text-align: center;
+	font-size: 30px;
+	margin: 5px;
+	margin-left: 220px;
+	float: left;
+}
+.ut_top_button{
+	margin-left: 50px;
+	float: left;
+	font-size: 20px;
+}
+.ut_table{
+	width: 100%;
+	height: 85%;
+}
+.ut_table_date{
+	width: 130px;
+}
+.ut_table_number{
+	width: 100px;
+}
+.ut_table_receiver{
+	width: 190px;
+}
+.ut_table_receivermoney{
+	width: 110px;
+}
+.ut_table div:nth-child(2) table,
+.ut_table tbody tr:nth-child(1) td{
+	border-top:none;
+}
+.ut_table thead td:nth-child(1),.ut_table tbody td:nth-child(1){
+	width:52px;
+}
+.ut_table thead td:nth-child(2),.ut_table tbody td:nth-child(2){
+	width:102px;
+}
+.ut_table thead td:nth-child(3),.ut_table tbody td:nth-child(3){
+	width:112px;
+}
+.ut_table thead td:nth-child(4),.ut_table tbody td:nth-child(4){
+	width:92px;
+}
+.ut_table thead td:nth-child(5),.ut_table tbody td:nth-child(5){
+	width:102px;
+}
+.ut_table thead td:nth-child(6),.ut_table tbody td:nth-child(6){
+	width:62px;
+}
+.ut_table thead td:nth-child(7),.ut_table tbody td:nth-child(7){
+	width:82px;
+}
+.ut_table thead td:nth-child(8),.ut_table tbody td:nth-child(8){
+	width:80px;
+}
+.ut_table thead td:nth-child(9),.ut_table tbody td:nth-child(9){
+	width:110px;
+}
+.ut_table thead td:nth-child(10),.ut_table tbody td:nth-child(10){
+	width:110px;
+}
+.ut_table thead td:nth-child(11){
+	width:16px;
+}
+.ut_table>div:nth-child(2){
+	height:320px;
+	overflow-y:scroll;
+}

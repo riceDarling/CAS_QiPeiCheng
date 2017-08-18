@@ -1,0 +1,106 @@
+.bg_style {
+    background-color: #6A8F97;
+    width: 1350px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.Text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 7px;
+    margin-bottom: 7px;
+    width: 100px;
+    height: 12px;
+}
+
+.Content {
+    background-color: white;
+    width: 98%;
+    height: 95%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.Sheet {
+	margin-top:2px;
+    font-size: 12px;
+    overflow: auto;
+    text-align: center;
+    width: 100%;
+    height: 92%;
+}
+
+.Sheet > table {
+    border-collapse: collapse;
+    white-space: nowrap;
+    width: 100%;
+    table-layout: fixed;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.Sheet > table > thead td {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 3px 5px;
+}
+
+.Sheet > table td {
+    border: 1px solid #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#quit {
+    float: right;
+}
+
+#Print {
+    float: left;
+}
+
+#seach {
+    position: relative;
+    top: 20px;
+    left: -550px;
+}
+
+#freight {
+    position: relative;
+    top: 39px;
+    left: -5px;
+}
+
+#total {
+    position: relative;
+    top: 0px;
+    left: 113px;
+}
+
+#totalandother {
+    position: relative;
+    top: -58px;
+    left: -275px;
+}
+
+#summation {
+    position: relative;
+    top: -99px;
+    left: 158px;
+}
+
+#select {
+    position: relative;
+    top: -96px;
+    left: 158px;
+}

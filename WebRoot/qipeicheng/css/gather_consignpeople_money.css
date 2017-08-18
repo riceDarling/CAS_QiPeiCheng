@@ -1,0 +1,55 @@
+.gcp_model_bg {
+    background-color: #6A8F97;
+    width: 600px;
+    height: 450px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.gcp_model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: -80px;
+    margin-bottom: 7px;
+    width: 260px;
+    height: 12px;
+}
+
+.gcp_model_content {
+    background-color: white;
+    width: 98%;
+    height: 90%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.gcp_table {
+    width: 80%;
+    height: 90%;
+    margin: 5px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    overflow: auto;
+    float: left;
+}
+
+.gcp_button {
+    float: left;
+    width: 17%;
+    margin-top: 100px;
+    margin-left: 5px;
+}
+
+.gcp_button_exit {
+    width: 80%;
+    height: 30%;
+    margin-left: 15px;
+}
+
+.gcp_button_input {
+    margin-left: 260px;
+    height: 5%;
+    width: 33%;
+    border: 1px solid black;
+}

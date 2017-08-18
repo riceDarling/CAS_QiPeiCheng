@@ -1,0 +1,79 @@
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/add.css" />
+<div class="add_model_bg">
+	<div class="add_model_text">增加客户</div>
+	<div class="add_model_content">
+		
+		<div class="add_middle">
+			<div class="add_middle_bg">
+				<div class="add_middle_hint">
+					<!--<span style="color: blue;margin-left: 50px;">*建议填写</span>-->
+					<span style="color: red;margin-left: 50px;">*建议最好填写</span>
+				</div>
+				<div class="add_middle_content">
+					<div class="add_middle_model">
+						<span class="add_style1">地区
+						  		<span style="color: red;">*</span>
+						<select id="region-a">
+						
+						</select>
+						</span>
+						<!--
+							<span style="margin-left: 20px;">
+									业务<span style="color: blue;"> * </span>
+							<input type="text" id="business-a"/>
+							</span>
+						-->
+					</div>
+					
+					<div class="add_middle_model">
+						<span class="add_style1">客户
+						  		<span style="color: red;">*</span>
+						<input type="text" id="customerName-a" placeholder="输入客户名称"/> <span style="color: red;"> * 必须填写 </span>
+						</span>
+
+					</div>
+					<div class="add_middle_model">
+						<span style="margin-left: 20px;">
+						  	代码&nbsp;
+						  	&nbsp;
+						  		<input type="text" id="zipCode-a" placeholder="输入客户代码"/>
+						  	</span>
+					</div>
+					<div class="add_middle_model">
+						<span class="add_style1">地址&nbsp;
+						  	&nbsp;
+						  		<input type="text" id="address-a"  placeholder="输入客户地址"/> 	
+						  	</span>
+
+					</div>
+					<div class="add_middle_model">
+						<span class="add_style1" >电话  &nbsp;&nbsp;
+						  		<input type="tel" id="phone-a" placeholder="输入客户电话"/> 	
+						  	</span>
+
+					</div>
+					<div class="add_middle_model">
+						<span class="add_style1">联系&nbsp;
+						  	&nbsp;
+						  		<input type="text" id="contacts-a"  placeholder="输入客户联系人" disabled/> 	
+						  	</span>
+
+					</div>
+					<div class="add_middle_model1">
+						<div class="add_middle_model1_left">银行账号</div>
+						<div class="add_middle_model1_right">
+							<input type="text" id="bankCard-a"  placeholder="输入银行账号" disabled/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="add_bottom">
+			<input type="button" class="add_button_confirm" value="确定" clickToClose>
+			<input type="button" class="add_button_ESC" value="退出" clickToClose>
+		</div>
+	</div>
+</div>
+<script src="js/add_client.js"></script>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qipeicheng.dao.LogisticsTrackingDao">
+
+	<!-- 添加运单状态信息 -->
+	<insert id="insertInformation" parameterType="cn.qipeicheng.entity.LogisticsTracking">
+		insert into
+		logisticstracking values (
+		null,
+		#{runnum},
+		#{date},
+		#{information},
+		#{status},
+		#{waybillId}
+		);
+	</insert>
+
+	<!-- 查询运单状态信息 超级管理员 会计 -->
+	<select id="selectInformation" parameterType="java.lang.String"
+		resultType="java.util.Map">
+		select id,runnum,date_format(date,'%Y-%m-%d %H:%i:%s') as
+		date,information,status,waybillId from logisticstracking where
+		runnum=#{runnum} order by status
+	</select>
+	<!-- 删除状态信息 -->
+	<delete id="deleteInformation" parameterType="java.lang.Integer">
+		delete from
+		logisticstracking where waybillId = #{id}
+	</delete>
+	<!-- 删除回退状态信息 -->
+	<delete id="deletefallbackInformation" parameterType="java.lang.Integer">
+	delete from
+	logisticstracking where waybillId = #{id} AND STATUS=
+	(select `status` from (SELECT b.`status`
+	FROM waybill b WHERE id=#{id}) a )
+	</delete>
+</mapper>

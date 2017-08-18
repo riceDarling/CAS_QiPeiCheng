@@ -1,0 +1,68 @@
+.qmb_model_bg {
+    background-color: #6A8F97;
+    width: 1000px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.qmb_model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: -66px;
+    margin-bottom: 7px;
+    width: 260px;
+    height: 12px;
+}
+
+.qmb_model_content {
+    background-color: white;
+    width: 98%;
+    height: 95%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.qmb_top {
+    margin-top: 3px;
+    margin-bottom: 5px;
+    height: 5%;
+    width: 100%;
+}
+
+.qmb_top_button {
+    margin-top: 5px;
+    width: 100%;
+    float: left;
+}
+
+.qmb_table {
+    height: 88%;
+    width: 100%;
+    overflow: auto;
+}
+
+.qmb_table_receive {
+    width: 140px;
+}
+
+.qmb_table_date {
+    width: 130px;
+}
+
+.qmb_table_number {
+    width: 30px;
+}
+
+.qmb_table_unpay {
+    width: 80px;
+}
+
+.qmb_table_money {
+    width: 90px;
+}
+
+.qmb_table_transportnumber {
+    width: 100px;
+}

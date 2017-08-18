@@ -1,0 +1,183 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/total_query.css" />
+<div class="tq_model_bg">
+    <div class="tq_model_text">综合报表——>综合汇总查询</div>
+    <div class="tq_model_content">
+        <div class="tq_one">
+            <div class="tq_one_two">
+                <span>物流托运装车报表</span>
+            </div>
+        </div>
+        <div class="tq_two">
+            <div class="tq_two_left">
+                <div class="tq_two_left_fill">
+                    <span>日期</span>
+                    <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" placeholder="点击输入日期" id="startDate"/> ->
+                    <input class="time_plugin_lv_onclick" time_plugin_lv_type="2" placeholder="点击输入日期" id="endDate"/>
+                </div>
+                <div class="tq_two_left_fill">
+                    <span>分店</span>
+                    <select style="width:100px;" id="consignmentPlaceId" getRegion>
+						<option value=""></option>
+					</select>
+                    <span style="margin-left: 50px;">上下关联店</span>
+                    <select style="width: 100px;" id="destinationId" getRegion><option value=""></option></select>
+                </div>
+                <div class="tq_two_left_fill">
+                    <input type="checkbox" />
+                    <span>不选接货员</span>
+                    <select style="width: 100px;"></select>
+                    <input type="checkbox" />
+                    <span>不选送货员</span>
+                    <select style="width: 100px;"></select>
+                </div>
+            </div>
+            <div class="tq_two_right">
+
+                <div class="tq_two_right_model">
+                    <input type="button" style="width:100px" value="查询" class="tq_two_right_button" id="query"/>
+                   <!--  <input type="button" value="打印" class="tq_two_right_button" /> -->
+                    <input type="button" style="width:100px" value="退出" class="tq_two_right_button" clickToClose/>
+                </div>
+            </div>
+        </div>
+        <div class="tq_three">
+            <table border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>笔数</td>
+                        <td>件数</td>
+                        <td>运费</td>
+                        <td>工本费</td>
+                        <td>服务费</td>
+                        <td>保险费</td>
+                        <td>托运方付</td>
+                        <td>送货费</td>
+                        <td>接收方应付</td>
+                        <td>接收方已付</td>
+                        <td>未付</td>
+                        <td>合计收费</td>
+                        <td>代收款</td>
+                        <td>手续费</td>
+                        <td>退货额</td>
+                        <td colspan="2">操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th class="tq_no_top" style="height:50px">收件</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="tq_no_top"> 
+                            <input type="button" value="明细" clickToPopup="synthesizeReportPickup_take_query_detail" t="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="tq_no_top" style="height:50px">装车</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="tq_no_top">
+                            <input type="button" value="明细" clickToPopup="synReportLoading_take_query_detail"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="tq_no_top" style="height:50px">卸车</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="tq_no_top"> 
+                            <input type="button" value="明细"  clickToPopup="synReportUpload_take_query_detail"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="tq_no_top" style="height:50px">取件</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="tq_no_top">
+                            <input type="button" value="明细"  clickToPopup="synReportTake_take_query_detail"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="tq_no_top" style="height:50px">付代收款</th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="tq_no_top">
+                            <input type="button" value="明细"  clickToPopup="synReportPayforCol_take_query_detail"/>
+                        </td>
+                    </tr>
+                </tbody>
+                <!-- <tfoot>
+                    <tr>
+                        <td align="left" colspan="18">注：有 <span style="color: red;">*</span> 的表示实际收款与付款</td>
+                    </tr>
+                </tfoot> -->
+            </table>
+        </div>
+    </div>
+</div>
+<script src="js/total_query.js"></script>

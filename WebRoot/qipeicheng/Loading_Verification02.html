@@ -1,0 +1,61 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/Loading_Verification02.css" />
+<script type="application/javascript" src="js/jquery-1.11.0.js"></script>
+<script src="js/jquery-1.11.0.js"></script>
+<div class="lv_model_bg">
+    <div class="lv_model_text">装车核查(逐笔扫描托运单的单号条形码)</div>
+    <div class="lv_model_content">
+        <div class="lv_one">
+            <span style="margin-left: 50px;">装车日</span>
+            <input type="text" class="date_plugin_xk" time readonly="ture" />
+            <span style="margin-left: 302px;"> 物流托运装车核对单 汽配城</span>
+            <span style="margin-left: 200px;"> <input type="button" style="width:100px;height:30px;" value="退出" clickToClose/></span>
+        </div>
+        <div class="lv_two">
+            <div class="lv_two_one cursor" clickToPopup="loading_verification" clickToClose>
+                第一步：装车检查，扫描托运单号条码
+            </div>
+            <div class="lv_two_two cursor" clickToPopup="Loading_Verification02" clickToClose>第二步：上传已装车托运单</div>
+            <div class="lv_two_one cursor">第三步：检查未装车托运单</div>
+            <div class="lv_two_one cursor">第四步：打印装车报表</div>
+        </div>
+        <div class="lv_three">
+            <div class="lv_three_one">
+
+            </div>
+            <div class="Sheet">
+                <table id="moveTable" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td width="50px">序号</td>
+                            <td width="70px">日期</td>
+                            <td width="70px">运单号</td>
+                            <td width="90px">托运方</td>
+                            <td width="70px">接收方</td>
+                            <td width="60px">件数</td>
+                            <td width="50px">运费/方式</td>
+                            <td width="60px">保险费</td>
+                            <td width="50px">工本费</td>
+                            <td width="60px">服务费</td>
+                            <td width="60px">托运方付</td>
+                            <td width="60px">代收款</td>
+                            <td width="60px">手续费</td>
+                            <td width="60px">接收方付</td>
+                            <td width="60px">目的地</td>
+                        </tr>
+                    </thead>
+                    <tbody id="secondPageTbody">
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div id="total">
+                <button style="width:100px;height:30px;" clickToPopup="loading_verification" clickToClose>上一步</button>
+                <button id="verificationUpload" style="width:100px;height:30px;" clickToPopup="Loading_Verification03"  clickToClose>核对上传</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/Loading_Verification02.js"></script>
+<script src="js/moveTable.js"></script>

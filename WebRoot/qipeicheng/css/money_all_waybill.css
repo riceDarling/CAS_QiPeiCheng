@@ -1,0 +1,63 @@
+.maw_model_bg {
+    background-color: #6A8F97;
+    width: 1000px;
+    height: 600px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.maw_model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: -77px;
+    margin-bottom: 7px;
+    width: 260px;
+    height: 12px;
+}
+
+.maw_model_content {
+    background-color: white;
+    width: 98%;
+    height: 95%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.maw_top {
+    margin-top: 3px;
+    margin-bottom: 5px;
+    height: 5%;
+    width: 100%;
+}
+
+.maw_top_button {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.maw_table {
+    height: 80%;
+    width: 100%;
+    overflow: auto;
+}
+
+.maw_table_receive {
+    width: 100px;
+}
+
+.maw_table_date {
+    width: 80px;
+}
+
+.maw_table_number {
+    width: 30px;
+}
+
+.maw_table_unpay {
+    width: 80px;
+}
+
+.maw_table_transportnumber {
+    width: 100px;
+}

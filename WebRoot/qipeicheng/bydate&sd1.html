@@ -1,0 +1,44 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/bydate&sd1.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="model_bg">
+    <div class="model_text">
+        按日期-发送方向汇总
+    </div>
+    <div class="model_content">
+
+        <div class="bds_one">
+            <span>
+				<input type="button" style="width:100px;height:30px" value="查询明细" clickToPopup="bydate&sd2"/>
+				<input type="button" style="width:100px;height:30px" value="打印" onclick="doPrint()"/>
+				<input type="button" style="width:100px;height:30px"  name="" id="" value="退出" clickToClose/>
+			</span>
+        </div>
+        <div class="bds_two">
+            <!--startprint-->
+            <h2>代收款汇总-按日期、发送方方向汇总</h2>
+            <table id="moveTable" width="100%" border="1" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td>原发地</td>
+                        <td>目的地</td>
+                        <td>付代收款日期</td>
+                        <td>代收款</td>
+                        <td>手续费</td>
+                        <td>实付款</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <!--endprint-->
+        </div>
+       <div class="bds_three">
+			代收款合计: <input type=text style="width:80px" id="totalsum" disabled></input> 银行手续费: <input type=text style="width:80px" id="counterFeesum" disabled></input> 实付款合计: <input type=text style="width:80px" id="paymentsum"  disabled></input>
+		</div>
+    </div>
+</div>
+<script src="js/bydate&sd1.js"></script>
+<script src="js/moveTable.js"></script>
+<script src="js/printTable.js"></script>

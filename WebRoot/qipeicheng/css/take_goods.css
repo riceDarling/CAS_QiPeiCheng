@@ -1,0 +1,146 @@
+.tg_model_bg {
+    background-color: #6A8F97;
+    width: 600px;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.tg_model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: -28px;
+    margin-bottom: 7px;
+    width: 120px;
+    height: 12px;
+}
+
+.tg_model_content {
+    background-color: white;
+    width: 98%;
+    height: 92%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.tg_one {
+    width: 100%;
+    height: 30%;
+}
+
+.tg_one_one {
+    text-align: center;
+    line-height: 33px;
+    width: 100%;
+    height: 30%;
+}
+
+.tg_one_two {
+    text-align: center;
+    line-height: 160px;
+    width: 100%;
+    height: 40%;
+    font-size: 40px;
+}
+
+.tg_one_three {
+    text-align: center;
+    line-height: 44px;
+    width: 100%;
+    height: 40%;
+}
+
+.tg_two {
+    width: 100%;
+    height: 70%;
+}
+
+.tg_two_one {
+    width: 100%;
+    height: 10%;
+}
+
+.tg_two_two {
+    width: 100%;
+    height: 10%;
+}
+
+.tg_two_three {
+    margin-top: 20px;
+    width: 100%;
+    height: 10%;
+}
+
+.tg_two_four {
+    width: 100%;
+    height: 96px;
+    line-height: 96px;
+}
+
+.tg_two_four_one {
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+.tg_two_four_two {
+    float: left;
+    width: 40%;
+    height: 100%;
+}
+
+.tg_two_four_three {
+    float: left;
+    width: 30%;
+    height: 100%;
+}
+
+.tg_two_four_one_one {
+    width: 100%;
+    height: 50%;
+}
+
+.tg_two_four_one_two {
+    width: 100%;
+    height: 40%;
+}
+
+.tg_two_four_two_one {
+    margin-top: 40px;
+    margin-left: 15px;
+    width: 100%;
+    height: 20%;
+}
+
+.tg_two_four_two_two {
+    margin-left: 15px;
+    margin-top: 10px;
+    width: 100%;
+    height: 20%;
+}
+
+.tg_two_five {
+    margin: 0 auto;
+    width: 80%;
+    height: 30%;
+}
+
+.tg_two_five_one {
+    width: 100%;
+    height: 30%;
+}
+
+.button_five {
+    width: 30%;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.button_six {
+
+
+    width: 30%;
+    font-size: 12px;
+    margin-left: 10px;
+}

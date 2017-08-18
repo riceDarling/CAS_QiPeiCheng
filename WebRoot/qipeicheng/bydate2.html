@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/bydate2.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="model_bg">
+    <div class="model_text">
+        明细表
+    </div>
+    <div class="model_content">
+
+        <div class="bd2_one">
+            <span>
+				<input type="button" style="width:100px;height:30px" name="" id="" value="退出" clickToClose/>
+			</span>
+        </div>
+        <div class="bd2_two">
+            <table id="moveTable" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td width="20%">目的店</td>
+                        <td width="20%">日期</td>
+                        <td width="20%">托运方</td>
+                        <td width="20%">接收方</td>
+                        <td width="20%">运单号</td>
+                        <td width="20%">代收款</td>
+                        <td width="20%">手续费</td>
+                        <td width="20%">实付款</td>
+                    </tr>
+                </thead>
+                <tbody id="secondPageTbody">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="bd2_three">
+			代收款合计: <input type=text style="width:80px" id="totalsum2" disabled></input> 银行手续费: <input type=text style="width:80px" id="counterFeesum2" disabled></input> 实付款合计: <input type=text style="width:80px" id="paymentsum2"  disabled></input>
+		</div>
+    </div>
+</div>
+<script src="js/bydate2.js"></script>
+<script src="js/moveTable.js"></script>

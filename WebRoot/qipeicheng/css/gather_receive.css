@@ -1,0 +1,58 @@
+.gr_model_bg {
+	background-color: #6A8F97;
+	width: 1400px;
+	height: 450px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.gr_model_text {
+	font-family: "微软雅黑";
+	font-size: 12px;
+	margin-top: 5px;
+	margin-left: 7px;
+	margin-bottom: 7px;
+	width: 260px;
+	height: 12px;
+}
+.gr_model_content{
+	background-color: white;
+	width: 98%;
+	height: 90%;
+	border: 1px solid black;
+	margin: 0 auto;
+}
+.gr_model_top{
+	font-size: 16px;
+	height:8%
+}
+.gr_model_radio{
+	margin: 2px;
+	width: 50%;
+	float: left;
+	border: 1px solid #EBEBEB;
+}
+.gr_model_button{
+	margin: 2px;
+	width: 40%;
+	float: left;
+}
+.gr_model_button_Exit{
+	margin: 2px;
+	margin-left: 300px;
+	float: left;
+}
+.gr_model_table{
+	overflow: auto;
+	width: 100%;
+	height: 83%;
+}
+.gr_table_date{
+	width: 140px;
+}
+.gr_table_money{
+	width: 140px;
+}
+.gr_model_bottom{
+	height: 10%;
+	margin-top: 7px;
+}

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qipeicheng.dao.CustomerDao">
+	<!-- 查询显示客户信息 超级管理员 -->
+	<select id="getCustomerInfos" resultType="java.util.Map">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE 1=1
+	</select>
+	<!-- 查询显示客户信息 普通用户 -->
+	<select id="getCustomerByCommon" parameterType="int" resultType="java.util.Map">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE 1=1  AND
+		b.adminId=#{adminId}
+	</select>
+	<!-- 增加一个客戶信息 -->
+	<insert id="addCustomer" parameterType="cn.qipeicheng.entity.Customer"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO customer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="customerName != null">customerName,</if>
+			<if test="customerAddress != null">customerAddress,</if>
+			<if test="customerPhone != null">customerPhone,</if>
+			<if test="customerContacts != null">customerContacts,</if>
+			<if test="bankCard != null">bankCard,</if>
+			<if test="code != null">code,</if>
+			<if test="regionId != null">regionId,</if>
+		</trim>
+		<trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+			<if test="id != null">#{id},</if>
+			<if test="customerName != null">#{customerName},</if>
+			<if test="customerAddress != null">#{customerAddress},</if>
+			<if test="customerPhone != null">#{customerPhone},</if>
+			<if test="customerContacts != null">#{customerContacts},</if>
+			<if test="bankCard != null">#{bankCard},</if>
+			<if test="code != null">#{code},</if>
+			<if test="regionId != null">#{regionId}</if>
+		</trim>
+	</insert>
+	<!-- 根据id查询客户信息  -->
+	<select id="getCustomerById" parameterType="int"
+		resultType="cn.qipeicheng.entity.Customer">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		as regionName FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE a.id = #{id}
+	</select>
+	<!-- 根据客户名称,电话号 查询客户信息  超级管理员 客户档案查询-->
+	<select id="getCustomerByName" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE 1=1
+		<if test="customerName!=null &amp;&amp;customerName!=''">
+			and a.customerName like "%"#{customerName}"%"
+		</if>
+		<if test="customerPhone!=null &amp;&amp;customerPhone!=''">
+			and a.customerPhone like "%"#{customerPhone}"%"
+		</if>
+	</select>
+	<!-- 根据客户名称,电话号 查询客户信息  业务员 客户档案查询-->
+	<select id="getCustomerByNameClient" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE 1=1 and b.adminId=#{adminId}
+		<if test="customerName!=null &amp;&amp;customerName!=''">
+			and a.customerName like "%"#{customerName}"%"
+		</if>
+		<if test="customerPhone!=null &amp;&amp;customerPhone!=''">
+			and a.customerPhone like "%"#{customerPhone}"%"
+		</if>
+	</select>
+	<!-- 根据目的地,客户名称,电话号,登录用户  查询客户信息 普通用户 登记接件查询-->
+	<select id="getCustomerByNamePhone" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE 1=1 and
+		b.adminId=#{adminId}
+		<if test="customerName!=null &amp;&amp;customerName!=''">
+			and a.customerName like "%"#{customerName}"%"
+		</if>
+		<if test="customerPhone!=null &amp;&amp;customerPhone!=''">
+			and a.customerPhone like "%"#{customerPhone}"%"
+		</if>
+		<if test="regionName!=null &amp;&amp;regionName!=''">
+			and b.regionName like "%"#{regionName}"%"
+		</if>
+	</select>
+	<!-- 根据目的地,客户名称,电话号  查询客户信息 超管 登记接件查询-->
+	<select id="getCustomerByNameRegion" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE 1=1
+		<if test="customerName!=null &amp;&amp;customerName!=''">
+			and a.customerName like "%"#{customerName}"%"
+		</if>
+		<if test="customerPhone!=null &amp;&amp;customerPhone!=''">
+			and a.customerPhone like "%"#{customerPhone}"%"
+		</if>
+		<if test="regionName!=null &amp;&amp;regionName!=''">
+			and b.regionName like "%"#{regionName}"%"
+		</if>
+	</select>
+	<!-- 修改客户信息 -->
+	<update id="upCustomerInfo" parameterType="cn.qipeicheng.entity.Customer">
+		UPDATE customer
+		<set>
+			<if test="customerName != null">customerName = #{customerName},</if>
+			<if test="customerAddress != null">customerAddress = #{customerAddress},</if>
+			<if test="customerPhone != null">customerPhone = #{customerPhone},</if>
+			<if test="customerContacts != null">customerContacts = #{customerContacts},</if>
+			<if test="bankCard != null">bankCard = #{bankCard},</if>
+			<if test="code != null">code = #{code},</if>
+			<if test="regionId != null">regionId = #{regionId}</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	<!-- 根据id删除指定客户信息 -->
+	<delete id="delCustomerById" parameterType="int">
+		delete from
+		customer
+		where id=#{id}
+	</delete>
+	<!-- 根据拼音模糊查询客户 超级管理员 -->
+	<select id="getCustomerByPY" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE 1=1
+		and
+		a.id
+		in (SELECT customer.id FROM `customer` WHERE
+		getPY(customer.customerName) LIKE "%"#{py}"%")
+	</select>
+	
+	<!-- 根据拼音,登录用户模糊查询客户  业务员-->
+	<select id="getCustomerInfoByPY" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT
+		a.id,a.customerName,a.customerAddress,a.customerPhone,a.customerContacts,a.bankCard,a.code,b.regionName
+		FROM customer a
+		LEFT JOIN region b ON a.regionId=b.id
+		WHERE 1=1 and
+		b.adminId=#{adminId}
+		and
+		a.id in (SELECT customer.id FROM `customer`
+		WHERE
+		getPY(customer.customerName) LIKE "%"#{py}"%")
+	</select>
+	<!-- 根据拼音模糊查询客户-按地区 -->
+	<select id="getCustomerInfoByPyRegion" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		SELECT * FROM customer ,region
+		WHERE
+		customer.regionId =
+		region.id
+		AND
+		region.regionName=#{regionName}
+		and
+		customer.id in (SELECT customer.id FROM `customer` WHERE
+		getPY(customer.customerName) LIKE "%"#{py}"%")
+	</select>
+</mapper>

@@ -1,0 +1,51 @@
+.bg_style {
+    background-color: #6A8F97;
+    width: 700px;
+    height: 160px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.Content {
+    background-color: white;
+    width: 98%;
+    height: 80%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.Sheet {
+    font-size: 12px;
+    overflow: auto;
+    text-align: center;
+    width: 685px;
+    height: 220px;
+}
+
+.Sheet > table {
+    border-collapse: collapse;
+    white-space: nowrap;
+    width: 100%;
+    table-layout: fixed;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.Sheet > table > thead td {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 3px 5px;
+}
+
+.Sheet > table td {
+    border: 1px solid #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

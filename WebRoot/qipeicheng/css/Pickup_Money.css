@@ -1,0 +1,100 @@
+.tg_model_bg {
+    background-color: #6A8F97;
+    width: 600px;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 5px;
+    /*    position: absolute;*/
+}
+
+.tg_model_text {
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: -28px;
+    margin-bottom: 7px;
+    width: 120px;
+    height: 12px;
+}
+
+.tg_model_content {
+    background-color: white;
+    width: 98%;
+    height: 92%;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.tg_one {
+    width: 100%;
+    height: 30%;
+}
+
+.tg_one_one {
+    text-align: center;
+    line-height: 33px;
+    width: 100%;
+    height: 30%;
+}
+
+.tg_two {
+    margin-left: 20px;
+    margin-top: 100px;
+    line-height: 35px;
+}
+
+.tg_one_two {
+    text-align: center;
+    line-height: 160px;
+    width: 100%;
+    height: 40%;
+    font-size: 40px;
+}
+
+#delivery_man {
+    margin-left: 20px;
+    margin-top: -150px;
+}
+
+#Money {
+    margin-left: 98px;
+    margin-top: 12px;
+}
+
+
+#Arrears {
+    margin-left: 97px;
+    margin-top: -79px;
+}
+
+#Other {
+    margin-left: 98px;
+    margin-top: 57px;
+}
+
+#detail_info {
+    margin-left: -60px;
+    margin-top: 57px;
+}
+
+#pay {
+    margin-left: 450px;
+    margin-top: -46px;
+}
+
+#quit {
+    margin-left: 450px;
+    margin-top: 13px;
+}
+
+
+
+input {
+    height: 30px;
+    width: 140px;
+}
+
+select {
+    height: 30px;
+    width: 80px;
+}

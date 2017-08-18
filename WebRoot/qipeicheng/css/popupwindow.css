@@ -1,0 +1,126 @@
+.popupwindow {
+	display: table;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+}
+
+.popuparea {
+	display: table-cell;
+	vertical-align: middle;
+	position: relative;
+	z-index: 2;
+}
+.bgcover{
+	position: absolute;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	z-index: 1;
+	background:#000;
+	opacity: 0;
+	filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=0); 
+}
+.popupbody {
+	display: inline-block;
+	max-width: 800px;
+	max-height: 700px;
+	overflow:auto;
+}
+
+.popupbody>dt {
+	background: #22373f;
+	line-height: 30px;
+	color: #fff;
+	z-index: 2;
+}
+
+.popupbody>dd {
+	width: 100%;
+	border:1px solid #22373f;
+	border-top:none;
+	box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: boder-box;
+}
+
+.editgrp {
+	text-align: left;
+	background: #f9f9f9;
+	padding: 10px;
+}
+
+.editgrp>dt {
+	line-height: 24px;
+}
+
+.editgrp>dd {
+	line-height: 28px;
+	white-space: nowrap;
+}
+
+.editgrp>dd label {
+	display: inline-block;
+	margin-right: 6px;
+	width: 130px;
+	text-align: right;
+}
+.editgrp>dd input[type="text"] {
+	width: 100px;
+	margin: 0;
+	margin: 0 5px;
+	height: 20px;
+	border: 1px solid #aaaaaa;
+	box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: boder-box;
+}
+
+.editgrp>dd input[type="button"] {
+	height: 20px;
+	box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: boder-box;
+	margin: 0 3px;
+}
+
+.editgrp>dd select {
+	margin: 0;
+	width: 100px;
+	margin: 0 5px;
+	height: 20px;
+	border: 1px solid #aaaaaa;
+	box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: boder-box;
+}
+.editgrp>dd>i{
+	font-style: normal;
+	display:inline-block;
+	width:12px;
+	color:#ff0000;
+}
+.confirmbtn{
+	text-align: center;
+	margin-top:16px;
+}
+.confirmbtn input[type="button"]{
+	margin:0 10px!important;
+	height:22px;
+	font-size: 14px;
+}

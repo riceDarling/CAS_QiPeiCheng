@@ -1,0 +1,50 @@
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/money_all_waybill.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="maw_model_bg">
+    <div class="maw_model_text">明细表</div>
+    <div class="maw_model_content">
+        <div class="maw_top">
+            <div class="maw_top_button">
+               <!--  <input style="height:80%; margin-left: 70px; float: left;width: 18%;" type="button" value="打印" onclick="doPrint()" /> -->
+                <input style="width: 10%;" type="button" value="退出" clickToClose/>
+            </div>
+        </div>
+        <!--startprint-->
+        <h2 style=" text-align:center">明细表</h2>
+        <div class="maw_table">
+            <table id="moveTable" style="text-align: center;font-size: 12px;" border="1" width="100%" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td>序号</td>
+                        <td class="maw_table_date">日期</td>
+                        <td class="maw_table_transportnumber">运单号</td>
+                        <td class="maw_table_receive">托运方</td>
+                        <td class="maw_table_receive">接收方</td>
+                        <td class="maw_table_number">件数</td>
+                        <td>托方付</td>
+                        <td>运费</td>
+                        <td>保险</td>
+                        <td>工本</td>
+                        <td>服务费</td>
+                        <td>送货费</td>
+                        <td>接方付</td>
+                        <td>未付</td>
+                        <td>代收款</td>
+                        <td>手续费</td>
+                        <td class="maw_table_receive">退货额</td>
+                        <td class="maw_table_date">发货地</td>
+                        <td class="maw_table_date">目的地</td>
+                    </tr>
+                </thead>
+                <tbody id="c">
+
+                </tbody>
+            </table>
+            <!--endprint-->
+        </div>
+    </div>
+</div>
+<script src="js/money_bydate2_money_all_waybill.js"></script>
+<script src="js/moveTable.js"></script>
+<script src="js/printTable.js"></script>

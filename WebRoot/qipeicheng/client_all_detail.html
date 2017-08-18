@@ -1,0 +1,84 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/client_all_detail.css" />
+<div class="bg_style">
+	<div class="Text">
+		所有取货付款订单
+	</div>
+	<div class="Content">
+	<div id="Print">
+		<button>打印回款单</button>
+		
+		
+	</div>
+	<div id="quit">
+		<button clickToClose>退出</button>
+		
+	</div>
+	<div class="Sheet" >
+			<table border="0" cellpadding="0" cellspacing="0" >
+				<thead>
+					<tr>
+						<td width="20px">序号</td>
+						<td width="90px">开单日期</td>
+						<td width="90px">取货日期</td>
+						<td width="90px">运单号</td>
+						<td width="70px">托运方</td>
+						<td width="80px">接收方</td>
+						<td width="60px">件数</td>
+						<td width="60px">托方付</td>
+						<td width="50px">运费</td>
+						<td width="50px">保险</td>
+						<td width="50px">工本</td>
+						<td width="60px">服务费</td>
+						<td width="60px">送货费</td>
+						<td width="60px">接方付</td>
+						<td width="60px">未付</td>
+						<td width="60px">代收款</td>
+						<td width="60px">手续费</td>
+						<td width="60px">退回</td>
+						<td width="120px">发货地------目的地</td>
+
+					</tr>
+				</thead>
+				<tbody id="secondPageTbody">
+					
+				</tbody>
+			</table>
+			
+		</div>
+		<div style="display: inline;"  id="seach"><input type="text" value="输入订单号"/>
+			<button type="submit">搜索</button>
+		</div>
+		<div>
+		<div id="freight">运费<input style="width: 80px;" type="text" id=""></div>
+		<div id="freight">运费<input style="width: 80px;" type="text" id=""></div>
+		</div>
+		<div>
+			<div id="total">总计<input type="text" style="width:80px;" id="total1"></div>
+			<div id="total">总计<input type="text" style="width:80px;" id="total2"></div>
+		</div>
+		<div id="summation">
+			<div style="display: inline;">合计<input type="text"style="width: 50px;"></div>
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+		</div>
+		<div id="select">
+			<div style="display: inline;">选择<input type="text"style="width: 50px;"></div>
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<div style="display: inline;"><input type="text"style="width: 50px;"></div>
+		</div>
+	</div>
+</div>
+<script src="js/client_all_detail.js"></script>

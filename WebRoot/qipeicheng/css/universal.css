@@ -1,0 +1,14 @@
+.bg_style {
+	background-color: #6A8F97;
+	width:700px;
+	height: 160px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.Content {
+	background-color: white;
+	width: 98%;
+	height: 80%;
+	border: 1px solid black;
+	margin: 0 auto;
+}

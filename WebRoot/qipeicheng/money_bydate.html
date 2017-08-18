@@ -1,0 +1,45 @@
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/money_bydate.css" />
+<script src="js/jquery-1.11.0.js"></script>
+<div class="md_model_bg">
+    <div class="md_model_text">按日期-方向方向汇总</div>
+    <div class="md_model_content">
+        <div class="md_top">
+            <div class="md_top_button">
+                <input style="height:80%; margin-left: 40px; float: left;width: 10%;" type="button" value="明细" clickToPopup="money_bydate_money_all_waybill" />
+                <input style="height:80%; margin-left: 60px; float: left;width: 10%;" type="button" value="打印" onclick="doPrint()" />
+                <input style="height: 80%;margin-left: 350px;float: left;width: 10%;" type="button" value="退出" clickToClose />
+            </div>
+        </div>
+        <div class="md_table">
+            <!--startprint-->
+            <h2>收款报表-按日期、方向汇总</h2>
+            <table id="moveTable" border="1" width="100%" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td class="md_table_receive">原发地&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;目的地</td>
+                        <td class="md_table_date">取货日期</td>
+                        <td class="md_table_number">笔数</td>
+                        <td class="md_table_number">件数</td>
+                        <td>托运方付</td>
+                        <td class="md_table_unpay">接收方式</td>
+                        <td>未收运费</td>
+                        <td class="md_table_unpay">代收款</td>
+                        <td>退代收</td>
+                        <td>退回笔数</td>
+                        <td>退回件数</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+
+                </tbody>
+            </table>
+            <!--endprint-->
+        </div>
+    </div>
+</div>
+<script src="js/money_bydate.js"></script>
+<script src="js/moveTable.js"></script>
+<script src="js/printTable.js"></script>

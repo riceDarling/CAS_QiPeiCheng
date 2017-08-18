@@ -1,0 +1,122 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/owe_input.css" />
+<div class="oi_model_bg">
+    <div class="oi_model_text">
+        物流运输---欠款输入单
+    </div>
+    <div class="oi_model_content">
+        <div class="oi_title">
+            <span>物流托运欠款输入单</span>
+            <span style="color: red;">汽配城</span>
+        </div>
+        <div class="oi_one">
+            <div class="oi_one_one">
+                <div class="oi_model_name">运单号</div>
+                <div class="oi_model_value2 borderright">
+                    <input type="text" name="" id="" value="" style="width: 110px;margin-left:5px;margin-top:3px;" />
+                </div>
+                <span style="margin-left: 260px;">取货时间</span>
+                <input type="text" id="time" readonly="true" />
+            </div>
+            <div class="oi_one_one">
+                <div class="oi_model_name">托运方</div>
+                <div class="oi_model_value">
+                    <input type="text" class="oi_model_text1" />
+                </div>
+                <div class="oi_model_name">收件方</div>
+                <div class="oi_model_value borderright">
+                    <input type="text" class="oi_model_text1" />
+                </div>
+            </div>
+            <div class="oi_one_one">
+                <div class="oi_model_name">地&nbsp;&nbsp;址</div>
+                <div class="oi_model_value">
+                    <input type="text" class="oi_model_text1" />
+                </div>
+                <div class="oi_model_name">地&nbsp;&nbsp;址</div>
+                <div class="oi_model_value borderright">
+                    <input type="text" class="oi_model_text1" />
+                </div>
+            </div>
+            <div class="oi_one_one">
+                <div class="oi_model_name">电&nbsp;&nbsp;话</div>
+                <div class="oi_model_value">
+                    <input type="text" class="oi_model_text1" />
+                </div>
+                <div class="oi_model_name">电&nbsp;&nbsp;话</div>
+                <div class="oi_model_value borderright">
+                    <input type="text" class="oi_model_text1" />
+                </div>
+            </div>
+            <div class="oi_one_one">
+                <div class="oi_model_name">联系人</div>
+                <div class="oi_model_value">
+                    <input type="text" class="oi_model_text1" />
+                </div>
+                <div class="oi_model_name">联系人</div>
+                <div class="oi_model_value borderright">
+                    <input type="text" class="oi_model_text1" />
+                </div>
+            </div>
+            <div class="oi_one_one">
+                <div class="oi_model_name borderbottom">备&nbsp;&nbsp;注</div>
+                <div class="oi_model_value1">
+                    <input type="text" class="oi_model_text2" />
+                </div>
+            </div>
+        </div>
+        <div class="oi_two">
+            <table border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td>运单号</td>
+                        <td>原寄店</td>
+                        <td>发货日期</td>
+                        <td>运费</td>
+                        <td>保险费</td>
+                        <td>送货费</td>
+                        <td>代收款</td>
+                        <td>接收方合计</td>
+                        <td>已付款</td>
+                        <td>接方欠款</td>
+                        <td>备注</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+
+                </tbody>
+                <tfoot>
+                    <td colspan="7"></td>
+                    <td colspan="4">总计：
+                        <input style="width:30px" /> 手续费
+                        <input type="width:10px" /> 剩余
+                        <input type="width:10px" />
+                    </td>
+                </tfoot>
+            </table>
+        </div>
+        <div class="oi_three">
+
+            <span style="margin-left: 300px;"><input type="button" value="收应收款"/></span>
+            <span style="margin-left: 50px;"><input type="button" value="退出" clickToClose /></span>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function time() {
+        var time = new Date();
+        var y = time.getFullYear();
+        var m = time.getMonth() + 1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var m = time.getMinutes();
+        var s = time.getSeconds();
+        return y + "-" + m + "-" + d + " " + h + ":" + m + ":" + s;
+    }
+
+    document.getElementById("time").value = time();
+
+</script>

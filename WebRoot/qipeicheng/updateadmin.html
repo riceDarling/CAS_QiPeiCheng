@@ -1,0 +1,45 @@
+<meta charset="utf-8" />
+<link rel="stylesheet" href="css/updateadmin.css" />
+<div class="add_model_bg">
+    <div class="add_model_text">修改管理员</div>
+    <div class="add_model_content">
+        <div class="add_middle">
+            <div class="add_middle_bg">
+                <div class="add_middle_hint">
+                    <span style="color: red;margin-left: 50px;"></br></span>
+                </div>
+                <div class="add_middle_content">
+                    <div class="add_middle_model">
+                        <span class="add_style1">账号
+						  		<span style="color: red;">*</span>
+                        <input type="text" id="adminName" placeholder="输入账号名称" /> <span style="color: red;"> * 必须填写 </span>
+                        </span>
+
+                    </div>
+                    <div class="add_middle_model">
+                        <span class="add_style1">密码
+						  		<span style="color: red;">*</span>
+                        <input type="text" id="adminPwd" placeholder="输入新的账户密码" /> <span style="color: red;"> * 必须填写 </span>
+                        </span>
+                    </div>
+                    <div class="add_middle_model">
+                        <span class="add_style1"> 权限
+						  		<span style="color: red;">*</span>
+                        <select id="power">
+                            <option>超级管理员</option>
+                            <option>会计</option>
+                            <option>业务员</option>
+						</select>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="add_bottom">
+            <input type="button" class="add_button_confirm" value="确定" id="update_btn" clickToClose>
+            <input type="button" class="add_button_ESC" value="退出" clickToClose>
+        </div>
+    </div>
+</div>
+<script src="./js/updateadmin.js"></script>
